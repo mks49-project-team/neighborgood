@@ -44,9 +44,17 @@ factoryModule.factory('mainFactory', function($http){
     console.log(user, 'this is the user object in factory')
   }
 
-  return {
-  	startupGeoLocation : startupGeoLocation,
-  	setUserDataFromGeoLocation : setUserDataFromGeoLocation
-  }
+  // var getCommute = function(secondaryAddress) {
+  //   return $http({
+  //     method: "GET",
+  //     url:
+  //   })
+  // }
 
+  return {
+    startupGeoLocation : startupGeoLocation,
+    setUserDataFromGeoLocation : setUserDataFromGeoLocation,
+    getCommute: getCommute
+
+  }
 });
