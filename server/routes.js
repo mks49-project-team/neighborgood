@@ -9,7 +9,7 @@ router.get('/geoLocation', controller.getGeoLocation);
 router.get('/restaurantLocation', controller.getRestaurantLocation);
 router.get('/storeLocation', controller.getStoreLocation);
 router.get('/crime', controller.getCrime);
-
+router.get('/directions', controller.getDirections);
 
 module.exports = {
   router: router
