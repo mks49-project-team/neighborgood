@@ -5,6 +5,7 @@ factoryModule.factory('mainFactory', function($http){
   var user = {};
   user.result = {};
 
+
   //uses GOOGLE GEOLOCATION api to grab addressData by address
   var startupGeoLocation = function(address) {
   	return $http({
@@ -78,21 +79,51 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var getDirectionsApi = function(originLat, originLng, destinationLat, destinationLng) {
+    // all parameters are getting passed succesfully, jeff @ 2:34pm oct 18
+    console.log('inside getDirectionsApi in app.factory, were the parameters successfully passed in?:', originLat, originLng, destinationLat, destinationLng)
     return $http({
       method: "GET",
       url: "api/directions",
       params: {
-        origin: [originLat, originLng],
-        destination: [destinationLat, destinationLng]
+        originLat: originLat,
+        originLng: originLng,
+        destinationLat: destinationLat,
+        destinationLng: destinationLng
       }
     })
+  }
+
+  var insertDirectionsData = function(data) {
+
+    user.result.commute = {
+      distance = {
+        text : data.distance.text,
+        value : data.distance.value
+      },
+
+      duration = {
+        text : data.duration.text,
+        value : data.duration.value
+      },
+
+      durationInTraffic = {
+        text : data.duration_in_traffic.text,
+        value : data.duration_in_traffic.value
+      }
+  }
+
+    console.log('user.result.distance.text:', user.result.distance.text)
+    console.log('the entire user.result object:', user.result)
   }
 
   return {
     startupGeoLocation : startupGeoLocation,
     setUserDataFromGeoLocation : setUserDataFromGeoLocation,
     secondUserData : secondUserData,
-    getUserData : getUserData
+    getUserData : getUserData,
+    getDirectionsApi : getDirectionsApi,
+    insertDirectionsData : insertDirectionsData,
+    user : user // for console.logs
 
 
   }

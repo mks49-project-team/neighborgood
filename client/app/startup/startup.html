@@ -1,5 +1,10 @@
 <div>
-	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA">
-	{{vm.newAddress}}
-	<button type="submit" ng-click="vm.newAddressPost()">Submit</button>
+  <form ng-submit="vm.newAddressPost()">
+  	<input type="text"  ng-model="vm.newAddress" placeholder="Input Address Here" >
+  	<button type="submit">Submit</button>
+  </form>
+</div>
+
+<div>
+<h1>604 Arizona Ave, Santa Monica, CA</h1>
 </div>

@@ -23,24 +23,34 @@ var controller = {
 
   getDirections : function(req, res) {
 
-    var originArr = req.query.origin
-    var destinationArr = req.query.destination
+    var originLat = req.query.originLat
+    var originLng = req.query.originLng
+    var destinationLat = req.query.destinationLat
+    var destinationLng = req.query.destinationLng
 
+    //serg wants the duration regular, regular and in traffic
 
-    googleMapsClient.directions({
-      origin: originArr,
-      destination: destinationArr
-    }, function(err, response) {
-      if (err) {
-        console.log('error in getDirections in controllers.js:', err)
+    var apiUrl = {
+      method: 'GET',
+      uri: 'https://maps.googleapis.com/maps/api/directions/json',
+      qs: {
+        origin: originLat + ',' + originLng,
+        destination: destinationLat + ',' + destinationLng,
+        key: process.env.GOOGLE_API_KEY,
+        departure_time: 1477494000
       }
-      res.send(response)
+    }
+
+    request(apiUrl, function(error, response, body) {
+      if (error) {
+        console.log('theres an error in getDirections in controllers:', error)
+      } else {
+        res.send(body)
+      }
     })
-
   }
-
-
 }
+
 module.exports = {
   controller: controller
 }
