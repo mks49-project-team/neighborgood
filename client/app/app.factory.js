@@ -11,7 +11,7 @@ factoryModule.factory('mainFactory', function($http){
   		method: 'GET',
   		url: 'api/geoLocation',
   		params: {newAddress: address}
-	})
+	  })
   }
 
   //uses info from startupGeoLocation and sets our user.newAddress
@@ -41,12 +41,93 @@ factoryModule.factory('mainFactory', function($http){
         latlng: data.geometry.location.lat + ',' + data.geometry.location.lng
     }
   }
-    console.log(user, 'this is the user object in factory')
+    //console.log(user, 'this is the user object in factory')
   }
+
+  //uses GOOGLE PLACES api to grab restaurant info by latlng
+  var startupRestaurantLocation = function(latlng) {
+    console.log(latlng, 'this is latlng')
+    return $http({
+      method: 'GET',
+      url: 'api/restaurantLocation',
+      params: {latlng: latlng}
+    })
+  }
+
+  //sets the user object with user.result.nearbyRestaurants
+  var setRestaurantData = function(data) {
+    user.result.nearbyRestaurants = [];
+    //console.log(data, 'this is data in set restaurants data ****')
+    var photoChecker = function(x) {
+          if (x.photos === undefined) {
+            return 'N/A'
+          } else {return x.photos[0].html_attributions[0]}
+        };
+
+    for (var i = 0; i < 5; i++) {
+      var photo = photoChecker(data[i]);
+      user.result.nearbyRestaurants.push({
+        icon : 'https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png',
+        name : data[i].name,
+        photo : photo,
+        priceLevel : data[i].price_level,
+        rating : data[i].rating,
+        lat : data[i].geometry.location.lat,
+        lng : data[i].geometry.location.lng,
+        latlng : data[i].geometry.location.lat + ',' + data[i].geometry.location.lng,
+        placeId: data[i].place_id
+      })
+    }
+    //console.log(user.result.nearbyRestaurants, 'these are the nearby restaruants')
+  }
+
+  //uses GOOGLE PLACES api to grab store info by latlng
+  var startupStoreLocation = function(latlng) {
+    //console.log(latlng, 'this is latlng')
+    return $http({
+      method: 'GET',
+      url: 'api/storeLocation',
+      params: {latlng: latlng}
+    })
+  }
+
+  //sets the user object with user.result.nearbyStores
+  var setStoreData = function(data) {
+    user.result.nearbyStores = [];
+    //console.log(data, 'this is data in set restaurants data ****')
+    var photoChecker = function(x) {
+          if (x.photos === undefined) {
+            return 'N/A'
+          } else {return x.photos[0].html_attributions[0]}
+        };
+
+    for (var i = 0; i < 5; i++) {
+      var photo = photoChecker(data[i]);
+      user.result.nearbyStores.push({
+        icon : 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        name : data[i].name,
+        photo : photo,
+        priceLevel : data[i].price_level,
+        rating : data[i].rating,
+        lat : data[i].geometry.location.lat,
+        lng : data[i].geometry.location.lng,
+        latlng : data[i].geometry.location.lat + ',' + data[i].geometry.location.lng,
+        placeId: data[i].place_id
+      })
+    }
+    //console.log(user.result.nearbyStores, 'these are the nearby stores')
+    console.log(user, 'this is the user object')
+  }
+  
 
   return {
   	startupGeoLocation : startupGeoLocation,
-  	setUserDataFromGeoLocation : setUserDataFromGeoLocation
+  	setUserDataFromGeoLocation : setUserDataFromGeoLocation,
+    startupRestaurantLocation : startupRestaurantLocation,
+    setRestaurantData : setRestaurantData,
+    startupStoreLocation : startupStoreLocation,
+    setStoreData : setStoreData,
+    user : user
   }
 
 });
