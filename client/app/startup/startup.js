@@ -16,7 +16,7 @@ startup.controller('startupController', function(mainFactory, $location){
   	})
   	.catch(function(err) {
   		console.log(err, 'error in startup / mainFactory.startupGeoLocation')
-  	})
+  	});
   };
   //startup - on submit, runs function to ping google PLACES api
   // and store data in our user.results.nearbyRestaurants object in factory.
@@ -38,5 +38,3 @@ startup.controller('startupController', function(mainFactory, $location){
   };
 
 });
-
-
