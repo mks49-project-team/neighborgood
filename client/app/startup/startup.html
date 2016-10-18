@@ -1,5 +1,7 @@
 <div>
+	<form ng-submit="vm.newAddressPost()">
 	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA">
 	{{vm.newAddress}}
-	<button type="submit" ng-click="vm.newAddressPost()">Submit</button>
+	<button type="submit">Submit</button>
+	</form>
 </div>
