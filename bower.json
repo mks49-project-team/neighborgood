@@ -1,0 +1,21 @@
+{
+  "name": "neighborgood",
+  "description": "get customized neighborhood info",
+  "main": "index.js",
+  "authors": [
+    "Lucy Ji <lucyji1000@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/lucyji1000/neighborgood",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8"
+  }
+}
