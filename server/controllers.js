@@ -1,5 +1,6 @@
 var request = require('request');
 
+
 var googleMapsClient = require('@google/maps').createClient({
 	key: process.env.GOOGLE_API_KEY
 });
@@ -22,7 +23,7 @@ var controller = {
 
 	//uses googlePlaces to grab nearest 5 restaurants to our map location
 	getRestaurantLocation : function(req, res) {
-	
+
 		var latlng = req.query.latlng;
 
 		googleMapsClient.placesNearby({
@@ -41,7 +42,7 @@ var controller = {
 
 	//uses googlePlaces to grab nearest 5 stores to our map location
 	getStoreLocation : function(req, res) {
-	
+
 		var latlng = req.query.latlng;
 
 		googleMapsClient.placesNearby({
@@ -62,4 +63,3 @@ var controller = {
 module.exports = {
   controller: controller
 }
-
