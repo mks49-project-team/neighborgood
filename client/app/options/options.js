@@ -1,12 +1,8 @@
 var options = angular.module('options', ['app.factory']);
-<<<<<<< HEAD
 
-options.controller('optionsController', function(){
-=======
-//
 // mainFactory is being injected from app.factory.js
 options.controller('optionsController', function(mainFactory){
->>>>>>> 4df3daf358fe8cd344edae900089fc0328b8f749
+
   var vm = this;
 
   vm.optionsGeoLocation = function() {
