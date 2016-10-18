@@ -2,7 +2,7 @@ var app = angular.module('app', ['ngRoute', 'app.factory', 'startup', 'options',
 
 app.config(function($routeProvider){
   $routeProvider
-    .when('/startup', {
+    .when('/', {
       templateUrl: 'app/startup/startup.html',
       controller: 'startupController',
       controllerAs: 'vm'
