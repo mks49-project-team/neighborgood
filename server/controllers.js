@@ -19,7 +19,26 @@ var controller = {
 		console.log(response.json.results, 'this is resuts from geoCode Google')
 		res.send(response.json.results)
 	})
-}
+},
+
+  getDirections : function(req, res) {
+
+    var originArr = req.query.origin
+    var destinationArr = req.query.destination
+
+
+    googleMapsClient.directions({
+      origin: originArr,
+      destination: destinationArr
+    }, function(err, response) {
+      if (err) {
+        console.log('error in getDirections in controllers.js:', err)
+      }
+      res.send(response)
+    })
+
+  }
+
 
 }
 module.exports = {
