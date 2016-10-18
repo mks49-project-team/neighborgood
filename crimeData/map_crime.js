@@ -1,24 +1,45 @@
-// var zipcodes = require('./zipcodesCA.json');
-// var crimeData = require('./la_crimes_2015.json');
+var geolib = require('geolib');
+var neighborhoodBoundaries = require('./neighborhoodBoundaries.json');
+var crimes = require('./crimeDataLA-2015.json');
+var fs = require('fs');
 
-var getDistance = function(lat1, lat2, lng1, lng2){
-  // Haversine formula for calculating distance between two points on a sphere
-  var R = 6378.137; // Earth radius in km
-  var lat1_rad = lat1 * Math.PI / 180;
-  var lat2_rad = lat2 * Math.PI / 180;
-  var lng1_rad = lng1 * Math.PI / 180;
-  var lng2_rad = lng2 * Math.PI / 180;
+var convertCoord = function(s){
+  var coord = s.slice(1, -1).split(' ');
+  coord[0] = coord[0].slice(0,-1);
+  return {
+    latitude: parseFloat(coord[0]),
+    longitude: parseFloat(coord[1])
+  };
+}
+console.log(crimes.length);
+console.log(neighborhoodBoundaries.length);
+var mappedCrimes = [];
 
-  var a = 0.5 * (lat2_rad - lat1_rad);
-  var b = Math.cos(lat1_rad) * Math.cos(lat2_rad);
-  var c = Math.sin(0.5 * (lng2 - lng1));
+for(var i = 0; i < 5; i++){
+  console.log('Currently on index ', i);
+  if(crimes[i].geolocation.indexOf('0.0,') !== -1) {
+    // skip entries with reported locations of (0, 0)
+    continue;
+  }
 
-  var d = 2 * R * Math.arcsin(Math.sqrt(Math.pow(a, 2) + b * Math.pow(c, 2)));
+  var crimeCoord = convertCoord(crimes[i].geolocation);
+  for(var j = 0; j < neighborhoodBoundaries.length; j++){
+    //console.log(geolib.isPointInside(crimeCoord, neighborhoodBoundaries[j].bounds))
+    if(geolib.isPointInside(crimeCoord, neighborhoodBoundaries[j].bounds)){
+      mappedCrimes.push({
+        date: crimes[i].date,
+        desc: crimes[i].crime_desc,
+        geolocation: crimes[i].geolocation,
+        area: neighborhoodBoundaries[i].name
+      });
+    }
+  }
 
-  return d;
 }
 
-
-var x = [33.87,-118.05,34.019,-118.49];
-
-console.log(getDistance(x));
+fs.writeFile('./mappedCrimes.json', JSON.stringify(mappedCrimes), function(err){
+  if(err){
+    throw err;
+  }
+  console.log('Finished conversion');
+});

@@ -19,6 +19,7 @@
   "dependencies": {
     "@google/maps": "^0.2.1",
     "body-parser": "^1.15.2",
+    "csvtojson": "^1.0.3",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "mongoose": "^4.6.4",
@@ -26,6 +27,7 @@
     "request": "^2.75.0"
   },
   "devDependencies": {
+    "geolib": "^2.0.21",
     "morgan": "^1.7.0"
   }
 }
