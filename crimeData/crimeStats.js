@@ -1,5 +1,3 @@
-//var geolib = require('geolib');
-
 var crimes = require('./crimeDataLA-2015.json');
 
 var convertCoord = function(s){
@@ -10,7 +8,9 @@ var convertCoord = function(s){
     longitude: parseFloat(coord[1])
   };
 }
+
 var getDistance = function(lat1, lon1, lat2, lon2){
+  // calculates distance [km] between two geocoordinates
   // Implementation taken from stackoverflow (Haversine formula)
   // http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
   var R = 6371; // km
@@ -34,14 +34,17 @@ var getCrimesWithinRadius = function(center, radius){
     }
     var crimeCoord = convertCoord(crimes[i].geolocation);
     var d = getDistance(crimeCoord.latitude, crimeCoord.longitude, center.latitude, center.longitude);
-    console.log(d);
-    if(d < radius){
+    if(d <= radius){
       crimeResults.push(crimes[i]);
     }
   }
   return crimeResults;
 }
 
-var x = {latitude: 33.9668, longitude: -118.4912};
-var y = getCrimesWithinRadius(x, 3);
-console.log(y.length);
+var tabulateCrimes = function(crimeData){
+
+}
+
+module.exports = {
+
+}
