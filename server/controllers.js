@@ -27,7 +27,7 @@ var controller = {
 
 		googleMapsClient.placesNearby({
 			location : latlng,
-			radius : 5000,
+			radius : 600,
 			rankBy : 'distance',
 			type : 'restaurant'
 		}, function(err, response) {
@@ -46,14 +46,14 @@ var controller = {
 
 		googleMapsClient.placesNearby({
 			location : latlng,
-			radius : 5000,
+			radius : 600,
 			rankBy : 'distance',
 			type : 'store'
 		}, function(err, response) {
 			if (err) {
 				console.log(err, 'error getStoreLocation controller.js')
 			}
-			//console.log(response.json, 'this is what i send from placesNarby getStoreLocation');
+			console.log(response.json, 'this is what i send from placesNarby getStoreLocation');
 			res.send(response.json);
 		});
 	},

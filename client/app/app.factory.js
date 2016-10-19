@@ -93,9 +93,15 @@ factoryModule.factory('mainFactory', function($http){
           if (x.photos === undefined) {
             return 'N/A'
           } else {return x.photos[0].html_attributions[0]}
-        };
+    };
 
-    for (var i = 0; i < 5; i++) {
+    if (data.length > 5) {
+          length = 5;
+    } else {
+      length = data.length;
+    }
+
+    for (var i = 0; i < length; i++) {
       var photo = photoChecker(data[i]);
       user.result.nearbyRestaurants.push({
         icon : 'https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png',
@@ -127,12 +133,21 @@ factoryModule.factory('mainFactory', function($http){
     user.result.nearbyStores = [];
     //console.log(data, 'this is data in set restaurants data ****')
     var photoChecker = function(x) {
+      var length;
           if (x.photos === undefined) {
             return 'N/A'
-          } else {return x.photos[0].html_attributions[0]}
-        };
+          } else {
+            return x.photos[0].html_attributions[0]
+          }
+    };
 
-    for (var i = 0; i < 5; i++) {
+    if (data.length > 5) {
+      length = 5;
+    } else {
+      length = data.length;
+    }
+
+    for (var i = 0; i < length; i++) {
       var photo = photoChecker(data[i]);
       user.result.nearbyStores.push({
         icon : 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',

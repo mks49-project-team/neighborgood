@@ -3,9 +3,9 @@ var results = angular.module('results', ['app.factory']);
 results.controller('resultsController', function(mainFactory){
   var vm = this;
 
-  window.initMap = function() {
+  vm.initMap = function() {
   	console.log('hi!')
-  	//vm.getMapData();
+  	vm.getMapData();
   }
 
   vm.getMapData = function() {
@@ -15,41 +15,35 @@ results.controller('resultsController', function(mainFactory){
   		lng: resPath.newAddress.lng
   	};
 
-  	var map = new google.maps.Map(document.getElementById('map'), {
-  		zoom: 4,
-  		center: userCenter
-  		//backgroundColor: 'pink',
-  		//scrollwheel: false
+  	vm.map = new google.maps.Map(document.getElementById('map'), {
+  		zoom: 14,
+  		center: userCenter,
+  		backgroundColor: 'pink',
+  		scrollwheel: false
   	})
 
   	//universalMarkerMaker 2 params, type (store, restaurant) and data
   	var universalMarkerMaker = function(type) {
-  		var storeCenter = {
-  		lat: resPath.nearbyStores.lat,
-  		lng: resPath.nearbyStores.lng
-  		}
-  			/// DID NOT SET UP THE NEARBY STUFF RIGHT, THERE SHOULD BE A [] ARRAY
-  		var restaurantCenter = {
-  		lat: resPath.nearbyRestaurants.lat,
-  		lng: resPath.nearbyRestaurants.lng
-  		}
 
   		if (type === 'store') {
   			resPath.nearbyStores.forEach(
   				function(item){
+            console.log(item, 'this is first item in stores')
   					var marker = new google.maps.Marker({
-  						position: storeCenter,
-  						map: map,
-  						icon: resPath.nearbyStores.icon
+  						position: {lat : item.lat, lng : item.lng},
+  						map: vm.map,
+  						icon: item.icon,
+              title: item.name
   					})
   				})
   		} else if (type === 'restaurant') {
   			resPath.nearbyRestaurants.forEach(
   				function(item){
+            console.log(item, 'this is first item in restaurants')
   					var marker = new google.maps.Marker({
-  						position: restaurantCenter,
-  						map: map,
-  						icon: resPath.nearbyRestaurants.icon
+  						position: {lat : item.lat, lng : item.lng},
+  						map: vm.map,
+  						icon: item.icon
   					})
   				})
   		}
