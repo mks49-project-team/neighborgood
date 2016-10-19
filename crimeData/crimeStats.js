@@ -71,28 +71,11 @@ var getCrimeRatesForLocation = function(geolocation, radius){
   return getCrimeCounts(getCrimesWithinRadius(geolocation, radius));
 }
 
-var getPopulation = function(lat, lng){
-  var options = {
-    method: 'GET',
-    url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
-    qs: {
-      statistics : 'population_density'
-    }
-  }
-  return new Promise(function(resolve, reject){
-    request(options, function(err, response, body){
-      if (err) {
-        return reject(err);
-      }
-      populationDensity = JSON.parse(body)[0].statistics.population_density.value;
-      resolve(Math.PI * Math.pow(5, 2) * populationDensity);
-    });
-  })
-}
 
 var getCrimeScore = function(req, res){
   var lat = req.query.latitude;
   var lng = req.query.longitude;
+  var crimeData = getCrimeCounts(getCrimesWithinRadius({latitude: lat, longitude: lng}, 5));
 
   var crimeRatesSanBernardino = { // most dangerous city
     homicide: 20.04,
@@ -106,35 +89,41 @@ var getCrimeScore = function(req, res){
     robbery: 14.82,
     assault: 2.3
   };
-
-  var crimeData = getCrimeCounts(getCrimesWithinRadius({latitude: lat, longitude: lng}, 5));
-  //var crimeData = getCrimeRatesForLocation({latitude: lat, longitude: lng}, 5);
-  getPopulation(lat, lng)
-    .then(function(population){
-      console.log('population: ', population)
-      var crimeRates = {};
-      _.each(crimeData, function(value, key){
-        crimeRates[key] = (value / population * 100000).toPrecision(3);
-      });
-      var diffs = {};
-      for(key in crimeRates){
-        if(crimeRates[key] > crimeRatesSanBernardino[key]){
-          diffs[key] = 1;
-        } else if (crimeRates[key] < crimeRatesIrvine[key]){
-          diffs[key] = 0;
-        } else {
-          diffs[key] = (crimeRates[key] - crimeRatesIrvine[key]) / (crimeRatesSanBernardino[key] - crimeRatesIrvine[key]);
-        }
+  // get population
+  var options = {
+      method: 'GET',
+      url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
+      qs: {
+        statistics : 'population_density'
       }
-      console.log('diffs: ', diffs);
-      // assign weights to each category based on seriousness of offense
-      var score = (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10;
-      res.json(score);
-    })
-    .catch(function(err){
+  };
+  request(options, function(err, response, body){
+    if (err) {
       console.log('error getting population data: ', err);
-      return;
+    }
+    populationDensity = JSON.parse(body)[0].statistics.population_density.value;
+    var population =  Math.PI * Math.pow(5, 2) * populationDensity;
+    var crimeRates = {};
+    _.each(crimeData, function(value, key){
+      crimeRates[key] = (value / population * 100000).toPrecision(3);
     });
+    var diffs = {};
+    for(key in crimeRates){
+      if(crimeRates[key] > crimeRatesSanBernardino[key]){
+        diffs[key] = 1;
+      } else if (crimeRates[key] < crimeRatesIrvine[key]){
+        diffs[key] = 0;
+      } else {
+        diffs[key] = (crimeRates[key] - crimeRatesIrvine[key]) / (crimeRatesSanBernardino[key] - crimeRatesIrvine[key]);
+      }
+    }
+    // assign weights to each category based on seriousness of offense
+    var score = (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10;
+    res.json(score);
+  });
+
+
+
 
   // assign score to crime based on seriousness of offense
 }
