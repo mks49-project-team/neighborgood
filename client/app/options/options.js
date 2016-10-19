@@ -3,6 +3,11 @@ var options = angular.module('options', ['app.factory']);
 // mainFactory is being injected from app.factory.js
 options.controller('optionsController', function(mainFactory){
   var vm = this;
+  vm.options = {
+    crime: true,
+    traffic: true,
+    walkability: true
+  };
 
   vm.optionsGeoLocation = function() {
     mainFactory.startupGeoLocation(vm.secondAddress)
