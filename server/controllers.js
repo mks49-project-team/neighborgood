@@ -1,6 +1,5 @@
 var request = require('request');
 
-
 var googleMapsClient = require('@google/maps').createClient({
 	key: process.env.GOOGLE_API_KEY
 });
@@ -65,28 +64,52 @@ var controller = {
     var originLng = req.query.originLng
     var destinationLat = req.query.destinationLat
     var destinationLng = req.query.destinationLng
+		var options = {
+			method: 'GET',
+			uri: 'https://maps.googleapis.com/maps/api/directions/json',
+			qs: {
+				origin: originLat + ',' + originLng,
+				destination: destinationLat + ',' + destinationLng,
+				key: process.env.GOOGLE_API_KEY,
+				departure_time: 1477494000
+			}
+		}
 
-    //serg wants the duration regular, regular and in traffic
+		request(options, function(error, response, body) {
+			if (error) {
+				console.log('theres an error in getDirections in controllers:', error)
+			} else {
+				res.send(body)
+			}
+		});
 
-    var options = {
-      method: 'GET',
-      uri: 'https://maps.googleapis.com/maps/api/directions/json',
-      qs: {
-        origin: originLat + ',' + originLng,
-        destination: destinationLat + ',' + destinationLng,
-        key: process.env.GOOGLE_API_KEY,
-        departure_time: 1477494000
-      }
-    }
+	},
 
-    request(options, function(error, response, body) {
-      if (error) {
-        console.log('theres an error in getDirections in controllers:', error)
-      } else {
-        res.send(body)
-      }
-    });
-  }
+	getScore : function(req, res) {
+		// get population density
+		// var userInfo = req.query;
+		var lat = req.query.latitude;
+		var lng = req.query.longitude;
+		var populationDensity; // km-2
+
+		var options = {
+			method: 'GET',
+			url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
+			qs: {
+				statistics : 'population_density'
+			}
+		}
+		request(options, function(err, response, body){
+			if (err) {
+				console.log('error getting population density: ', err);
+				res.send(err);
+			}
+
+			populationDensity = body[0].statistics.population_density.value;
+
+		});	
+	}
+
 }
 
 module.exports = {
