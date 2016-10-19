@@ -29,9 +29,9 @@ results.controller('resultsController', function(mainFactory){
       icon: {url:'http://maps.gstatic.com/mapfiles/place_api/icons/camping-71.png', scaledSize: new google.maps.Size(30,30)},
       title: 'YOUR NEW HOUSE!'
     })
-      
+
       home.setAnimation(google.maps.Animation.BOUNCE);
-      
+
       // function toggleBounce() {
       //   if (home.getAnimation() !== null) {
       //     home.setAnimation(null);
@@ -46,7 +46,7 @@ results.controller('resultsController', function(mainFactory){
   	//universalMarkerMaker 2 params, type (store, restaurant) and data
   	var universalMarkerMaker = function(type) {
       var iconMaker = function (icon) {
-        var ans = { 
+        var ans = {
           url: icon,
           // size: new google.maps.Size(50, 50),
           // origin: new google.maps.Point(0, 0),
