@@ -55,7 +55,7 @@ options.controller('optionsController', function(mainFactory){
     .catch(function(err) {
       console.log('err in getUserData in startupController:', err)
     })
-}
+  }
 
   vm.insertDirectionsData = function(data) {
     console.log("JEFF YOOOO:", data)

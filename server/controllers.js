@@ -1,6 +1,6 @@
 var request = require('request');
 //var crime = require('../crimeData/crimeStats.js');
-var score = require('./neighborhoodScore.js');
+var neighborhoodScore = require('./neighborhoodScore.js');
 
 
 var googleMapsClient = require('@google/maps').createClient({
@@ -89,9 +89,7 @@ var controller = {
 	},
 
 	getScore : function(req, res) {
-
-		// crime.getCrimeScore(req, res);
-		score.getScores(req, res);
+		neighbordScore.getScores(req, res);
 	}
 
 }
