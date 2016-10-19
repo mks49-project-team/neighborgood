@@ -1,6 +1,5 @@
 var request = require('request');
 
-
 var googleMapsClient = require('@google/maps').createClient({
 	key: process.env.GOOGLE_API_KEY
 });
@@ -57,6 +56,33 @@ var controller = {
 			//console.log(response.json, 'this is what i send from placesNarby getStoreLocation');
 			res.send(response.json);
 		})
+	},
+
+	getScore : function(req, res) {
+		// get population density
+		// var userInfo = req.query;
+		var lat = req.query.latitude;
+		var lng = req.query.longitude;
+		var populationDensity; // km-2
+
+		var options = {
+			method: 'GET',
+			url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
+			qs: {
+				statistics : 'population_density'
+			}
+		}
+		request(options, function(err, response, body){
+			if (err) {
+				console.log('error getting population density: ', err);
+				res.send(err);
+			}
+
+			populationDensity = body[0].statistics.population_density.value;
+
+		});
+
+		
 	}
 
 }

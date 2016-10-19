@@ -17,19 +17,19 @@ csvConverter.on("end_parsed",function(jsonObj){
 
 // Convert neighborhood geojson file to json with coordinates in format requested for geolib module
 // Geojson obtained from  http://boundaries.latimes.com/set/la-county-neighborhoods-v6/
-var neighborhoods = require('./la-county-neighborhoods-v6.geojson').features;
-
-var neighborhoodBoundaries = neighborhoods.map(function(neighborhood){
-  return {
-    name: neighborhood.properties.name.toLowerCase(),
-    bounds: neighborhood.geometry.coordinates[0][0]
-      .map(function(coord){
-        return {latitude: coord[0], longitude: coord[1]};
-      })
-  }
-});
-
-fs.writeFile('./neighborhoodBoundaries.json', JSON.stringify(neighborhoodBoundaries), function(err){
-  if(err) {throw err;}
-  console.log('finished converting neighborhood data');
-});
+// var neighborhoods = require('./la-county-neighborhoods-v6.geojson').features;
+//
+// var neighborhoodBoundaries = neighborhoods.map(function(neighborhood){
+//   return {
+//     name: neighborhood.properties.name.toLowerCase(),
+//     bounds: neighborhood.geometry.coordinates[0][0]
+//       .map(function(coord){
+//         return {latitude: coord[0], longitude: coord[1]};
+//       })
+//   }
+// });
+//
+// fs.writeFile('./neighborhoodBoundaries.json', JSON.stringify(neighborhoodBoundaries), function(err){
+//   if(err) {throw err;}
+//   console.log('finished converting neighborhood data');
+// });
