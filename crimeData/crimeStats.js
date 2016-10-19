@@ -41,10 +41,34 @@ var getCrimesWithinRadius = function(center, radius){
   return crimeResults;
 }
 
-var tabulateCrimes = function(crimeData){
+var getCrimeCounts = function(crimes){
 
+  var crimeCounts = {
+    homicide: 0,
+    rape: 0,
+    robbery: 0,
+    assault: 0
+  };
+
+  crimes.forEach(function(crime){
+    var cat = String(crime.crime_desc);
+    if(cat.indexOf('ASSAULT') > -1 || cat.indexOf('BATTERY') > -1 || cat.indexOf('SHOTS') > -1){
+      crimeCounts.assault = crimeCounts.assault + 1;
+    } else if (cat.indexOf('ROBBERY') > -1){
+      crimeCounts.robbery = crimeCounts.robbery + 1;
+    } else if (cat.indexOf('RAPE') > -1){
+      crimeCounts.rape = crimeCounts.rape + 1;
+    } else if (cat.indexOf('HOMICIDE') > -1){
+      crimeCounts.homicide = crimeCounts.homicide + 1;
+    }
+  });
+  return crimeCounts;
+}
+
+var getCrimeRatesForLocation = function(geolocation, radius){
+  return getCrimeCounts(getCrimesWithinRadius(geolocation, radius));
 }
 
 module.exports = {
-
-}
+  getCrimeRatesForLocation: getCrimeRatesForLocation
+};
