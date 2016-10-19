@@ -1,6 +1,8 @@
 var crimes = require('./crimeDataLA-2015.json');
 var request = require('request');
 var _ = require('lodash');
+// var neighborhoodScore = require('../server/neighborhoodScore.js');
+
 
 var convertCoord = function(s){
   var coord = s.slice(1, -1).split(' ');
@@ -71,10 +73,21 @@ var getCrimeRatesForLocation = function(geolocation, radius){
   return getCrimeCounts(getCrimesWithinRadius(geolocation, radius));
 }
 
+var calcTotalScore = function(weights, scores){
+  // calculate total score by weighting each category
+  var total = 0;
+  _.each(weights, function(weight, category){
+    if(scores[category]){
+      total += weight * scores[category];
+    }
+  });
+  return total;
+}
 
-var getCrimeScore = function(req, res){
+var getCrimeScore = function(req, res, scoreWeights, scores){
   var lat = req.query.latitude;
   var lng = req.query.longitude;
+  // get all crimes within 5 km radius
   var crimeData = getCrimeCounts(getCrimesWithinRadius({latitude: lat, longitude: lng}, 5));
 
   var crimeRatesSanBernardino = { // most dangerous city
@@ -118,16 +131,15 @@ var getCrimeScore = function(req, res){
       }
     }
     // assign weights to each category based on seriousness of offense
-    var score = (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10;
-    res.json(score);
+    var crimeScore = (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10;
+    scores.crime = crimeScore;
+    scores.total = calcTotalScore(scoreWeights, scores);
+    res.json(scores);
   });
 
-
-
-
-  // assign score to crime based on seriousness of offense
 }
 
 module.exports = {
   getCrimeScore: getCrimeScore
-};
+}
+console.log(module.exports);

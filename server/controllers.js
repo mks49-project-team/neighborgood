@@ -1,5 +1,5 @@
 var request = require('request');
-var crime = require('../crimeData/crimeStats.js');
+//var crime = require('../crimeData/crimeStats.js');
 var score = require('./neighborhoodScore.js');
 
 
@@ -90,8 +90,8 @@ var controller = {
 
 	getScore : function(req, res) {
 
-		crime.getCrimeScore(req, res);
-		//score.getScore(req, res);
+		// crime.getCrimeScore(req, res);
+		score.getScores(req, res);
 	}
 
 }
