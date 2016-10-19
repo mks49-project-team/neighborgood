@@ -172,17 +172,17 @@ factoryModule.factory('mainFactory', function($http){
   var insertDirectionsData = function(data) {
 
     user.result.commute = {
-      distance = {
+      distance : {
         text : data.distance.text,
         value : data.distance.value
       },
 
-      duration = {
+      duration : {
         text : data.duration.text,
         value : data.duration.value
       },
 
-      durationInTraffic = {
+      durationInTraffic : {
         text : data.duration_in_traffic.text,
         value : data.duration_in_traffic.value
       }

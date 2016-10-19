@@ -8,7 +8,7 @@ var controller = require('./controllers.js').controller;
 router.get('/geoLocation', controller.getGeoLocation);
 router.get('/restaurantLocation', controller.getRestaurantLocation);
 router.get('/storeLocation', controller.getStoreLocation);
-router.get('/crime', controller.getCrime);
+//router.get('/crime', controller.getCrime);
 router.get('/directions', controller.getDirections);
 
 module.exports = {
