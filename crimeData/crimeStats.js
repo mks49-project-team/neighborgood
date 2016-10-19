@@ -62,6 +62,7 @@ var getCrimeCounts = function(crimes){
       crimeCounts.homicide = crimeCounts.homicide + 1;
     }
   });
+  console.log(crimeCounts);
   return crimeCounts;
 }
 
