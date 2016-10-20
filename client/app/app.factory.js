@@ -213,12 +213,24 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var getScore = function(userData) {
-    console.log('is getScore working?')
-
     return $http({
       method: "GET",
       url: "api/score",
       params: userData
+    })
+  }
+
+  // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
+  var postData = function(userData) {
+    // JEFF IS LEARNING SOMETHING!!!
+    // data is for post, params is for get
+    // post req.body
+    // get req.query
+    console.log('wtf just went in?', userData);
+    return $http({
+      method: "POST",
+      url: "api/post",
+      data: userData
     })
   }
 
@@ -235,6 +247,7 @@ factoryModule.factory('mainFactory', function($http){
     setStoreData : setStoreData,
     insertCheckboxesData : insertCheckboxesData,
     getScore : getScore,
+    postData : postData,
     user : user // for console.logs
   }
 });

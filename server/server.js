@@ -3,6 +3,7 @@ require('dotenv').config();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var router = require('./routes.js');
+var db = require('../db/index.js')
 
 var app = express();
 

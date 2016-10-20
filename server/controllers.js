@@ -1,6 +1,7 @@
 var request = require('request');
 //var crime = require('../crimeData/crimeStats.js');
 var neighborhoodScore = require('./neighborhoodScore.js');
+var accountsController = require('./../db/accounts/accountsController.js')
 
 
 var googleMapsClient = require('@google/maps').createClient({
@@ -92,6 +93,11 @@ var controller = {
 
 		neighborhoodScore.getScores(req, res);
 
+	},
+
+	postData : function(req, res) {
+		console.log('this is postData in controllers.js, this is req.body:', req.body);
+		accountsController.accounts(req.body);
 	}
 
 }

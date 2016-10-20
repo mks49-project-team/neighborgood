@@ -62,7 +62,11 @@ options.controller('optionsController', function(mainFactory){
 
   vm.insertCheckboxesData = function(data) {
     console.log('inside insertCheckboxesData, this is the data being passed:', data)
-    mainFactory.insertCheckboxesData(data);
+    mainFactory.insertCheckboxesData(data)
+
+
+    mainFactory.postData(mainFactory.user)
+
   }
 
 
