@@ -4,15 +4,17 @@ factoryModule.factory('mainFactory', function($http){
   //user OBJECT, stores our user.profile, user.results, everything
   var user = {};
   user.result = {};
-  user.result.checkboxes = {};
-
+  user.result.priorities = {};
+  user.result.neighborhoodResult = {};
 
   //uses GOOGLE GEOLOCATION api to grab addressData by address
   var startupGeoLocation = function(address) {
   	return $http({
   		method: 'GET',
   		url: 'api/geoLocation',
-  		params: {newAddress: address}
+  		params: {
+        newAddress: address
+      }
 	  })
   }
 
@@ -206,20 +208,33 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var insertCheckboxesData = function(data) {
-    user.result.checkboxes = data;
-    console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
-    console.log('jefffyooo: whats in the user object?:', user)
-    getScore(user);
+    user.result.priorities = data;
+    // console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
+    // console.log('jefffyooo: whats in the user object?:', user)
+    // getScore()
+    //   .then(function(response){
+    //     user.result.neighborhoodResult = response.data;
+    //     console.log(response);
+    //   })
+    //   .catch(function(err){
+    //     console.log('error getting score: ', err);
+    //   });
   }
 
-  var getScore = function(userData) {
+  var getScore = function() {
     console.log('is getScore working?')
 
     return $http({
       method: "GET",
       url: "api/score",
-      params: userData
-    })
+      params: {
+        userData: user.result
+      }
+    });
+  }
+  var setUserNeighborhoodResult = function(neighborhoodResult){
+    user.result.neighborhoodResult = neighborhoodResult;
+    console.log(neighborhoodResult);
   }
 
   return {
@@ -235,6 +250,7 @@ factoryModule.factory('mainFactory', function($http){
     setStoreData : setStoreData,
     insertCheckboxesData : insertCheckboxesData,
     getScore : getScore,
+    setUserNeighborhoodResult : setUserNeighborhoodResult,
     user : user // for console.logs
   }
 });

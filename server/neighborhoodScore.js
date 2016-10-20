@@ -25,14 +25,14 @@ var getScoreWeighting = function(priorities){
   var sum = _.reduce(priorities, function(tot, value, key) {
     return tot + value;
   });
-  console.log('sume: ', sum);
+
   var max = _.reduce(priorities, function(max, x){ // max rating
     if (x > max) {
       return x;
     }
     return max;
   });
-  console.log('max: ', max);
+
   var weights = {};
   _.each(priorities, function(value, key){
     if(value === 0) { // ignore categories marked unimportant
@@ -59,19 +59,20 @@ var calcTotalScore = function(weights, scores){
 
 var getScores = function(req, res){
   // for testing ******
-  var priorities = {walkability: 2, crime: 3, commute: 1};
-
-  var userData = {};
-  userData.nearbyRestaurants = new Array(20);
-  userData.nearbyStores = new Array(6);
+  // var priorities = {walkability: 2, crime: 3, commute: 1};
+  //
+  // var userData = {};
+  // userData.nearbyRestaurants = new Array(20);
+  // userData.nearbyStores = new Array(6);
   // userData.commute.duration.value = 3600;
 
-  // var userData = req.query.userData;
-  // var priorities = userData.priorities;
-  // var geolocation = {
-  //   latitude: userData.newAddress.lat,
-  //   longitude: userData.newAddress.lng
-  // };
+  var userData = JSON.parse(req.query.userData);
+  var priorities = userData.priorities;
+  console.log('userData ', userData.newAddress);
+  var geolocation = {
+    latitude: userData.newAddress.lat,
+    longitude: userData.newAddress.lng
+  };
   var scoreWeights = getScoreWeighting(priorities);
 
   var scores = {};
@@ -86,7 +87,15 @@ var getScores = function(req, res){
     scores.walkability = getWalkabilityScore(userData.nearbyRestaurants, userData.nearbyStores);
   }
   if (priorities.crime) {
-    crime.getCrimeScore(req, res, scoreWeights, scores);
+    crime.getCrimeScore(req)
+      .then(function(crimeScore){
+        scores.crime = crimeScore;
+        scores.total = calcTotalScore(scoreWeights, scores);
+        res.json(scores);
+      })
+      .catch(function(err){
+        res.send(err);
+      });
   } else {
     scores.total = calcTotalScore(scoreWeights, scores);
     res.json(scores);
