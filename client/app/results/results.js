@@ -87,3 +87,8 @@ results.controller('resultsController', function(mainFactory){
   }
   console.log('inside resultsController');
 });
+
+results.controller('scoresController', function(){
+  var vm = this;
+  vm.test = 'hi';
+})
