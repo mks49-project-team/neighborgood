@@ -68,7 +68,7 @@ var getScores = function(req, res){
 
   var userData = JSON.parse(req.query.userData);
   var priorities = userData.priorities;
-  console.log('userData ', userData.newAddress);
+  console.log('userData ', priorities);
   var geolocation = {
     latitude: userData.newAddress.lat,
     longitude: userData.newAddress.lng
