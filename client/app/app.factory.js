@@ -5,6 +5,7 @@ factoryModule.factory('mainFactory', function($http){
   var user = {};
   user.result = {};
   user.result.priorities = {};
+  user.result.neighborhoodResult = {};
 
   //uses GOOGLE GEOLOCATION api to grab addressData by address
   var startupGeoLocation = function(address) {
@@ -208,12 +209,16 @@ factoryModule.factory('mainFactory', function($http){
 
   var insertCheckboxesData = function(data) {
     user.result.priorities = data;
-    console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
-    console.log('jefffyooo: whats in the user object?:', user)
-    getScore()
-      .then(function(response){
-        console.log(response)
-      });
+    // console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
+    // console.log('jefffyooo: whats in the user object?:', user)
+    // getScore()
+    //   .then(function(response){
+    //     user.result.neighborhoodResult = response.data;
+    //     console.log(response);
+    //   })
+    //   .catch(function(err){
+    //     console.log('error getting score: ', err);
+    //   });
   }
 
   var getScore = function() {
@@ -226,6 +231,10 @@ factoryModule.factory('mainFactory', function($http){
         userData: user.result
       }
     });
+  }
+  var setUserNeighborhoodResult = function(neighborhoodResult){
+    user.result.neighborhoodResult = neighborhoodResult;
+    console.log(neighborhoodResult);
   }
 
   return {
@@ -241,6 +250,7 @@ factoryModule.factory('mainFactory', function($http){
     setStoreData : setStoreData,
     insertCheckboxesData : insertCheckboxesData,
     getScore : getScore,
+    setUserNeighborhoodResult : setUserNeighborhoodResult,
     user : user // for console.logs
   }
 });

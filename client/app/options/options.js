@@ -1,7 +1,7 @@
 var options = angular.module('options', ['app.factory']);
 
 // mainFactory is being injected from app.factory.js
-options.controller('optionsController', function(mainFactory){
+options.controller('optionsController', function(mainFactory, $location){
 
   var vm = this;
   vm.priorities = {
@@ -48,11 +48,20 @@ options.controller('optionsController', function(mainFactory){
         vm.insertCheckboxesData(vm.priorities);
         mainFactory.getScore()
           .then(function(response){
-            console.log(response);
+            mainFactory.setUserNeighborhoodResult(response.data);
+            $location.path('results');
           })
           .catch(function(err){
-            console.log(err);
-          });
+            console.log('error getting scores: ', err);
+          })
+          // .then(function(response){
+          //   mainFactory.setUserNeighborhoodResult(response);
+          //   console.log('response: ', response);
+          //   $location.path('results');
+          // })
+          // .catch(function(err){
+          //   console.log(err);
+          // });
         // console.log('response inside getUserData:', response.data.routes[0].legs[0])
         // console.log('distance:', response.data.routes[0].legs[0].distance)
         // console.log('duration:', response.data.routes[0].legs[0].duration)
