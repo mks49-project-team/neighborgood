@@ -85,11 +85,14 @@ var calcTotalScore = function(weights, scores){
 }
 
 var getCrimeScore = function(req, res, scoreWeights, scores){
-  var lat = req.query.latitude;
-  var lng = req.query.longitude;
+  var userData = JSON.parse(req.query.userData);
+  var lat = userData.newAddress.lat;
+  var lng = userData.newAddress.lng;
   // get all crimes within 5 km radius
   var crimeData = getCrimeCounts(getCrimesWithinRadius({latitude: lat, longitude: lng}, 5));
-
+  console.log('lat: ', lat);
+  console.log('lng: ', lng);
+  console.log('crimeData: ', crimeData);
   var crimeRatesSanBernardino = { // most dangerous city
     homicide: 20.04,
     rape: 48.46,

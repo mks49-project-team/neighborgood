@@ -4,11 +4,11 @@ var options = angular.module('options', ['app.factory']);
 options.controller('optionsController', function(mainFactory){
 
   var vm = this;
-  vm.checkboxes = {
+  vm.priorities = {
     // crime: true,
-    crimeClicked: 1,
-    trafficClicked: 1,
-    walkabilityClicked: 1
+    crime: 1,
+    commute: 1,
+    walkability: 1
   };
 
   vm.optionsGeoLocation = function() {
@@ -45,15 +45,22 @@ options.controller('optionsController', function(mainFactory){
     // console.log('this is vm.getDirectionsApi, checking the response after invoking the function', response)
       .then(function(response) {
         vm.insertDirectionsData(response.data.routes[0].legs[0]);
-        vm.insertCheckboxesData(vm.checkboxes)
+        vm.insertCheckboxesData(vm.priorities);
+        mainFactory.getScore()
+          .then(function(response){
+            console.log(response);
+          })
+          .catch(function(err){
+            console.log(err);
+          });
         // console.log('response inside getUserData:', response.data.routes[0].legs[0])
         // console.log('distance:', response.data.routes[0].legs[0].distance)
         // console.log('duration:', response.data.routes[0].legs[0].duration)
         // console.log('duration in traffic:', response.data.routes[0].legs[0].duration_in_traffic)
       })
-    .catch(function(err) {
-      console.log('err in getUserData in startupController:', err)
-    })
+      .catch(function(err) {
+        console.log('err in getUserData in startupController:', err)
+      });
   }
 
   vm.insertDirectionsData = function(data) {
@@ -65,7 +72,6 @@ options.controller('optionsController', function(mainFactory){
     console.log('inside insertCheckboxesData, this is the data being passed:', data)
     mainFactory.insertCheckboxesData(data);
   }
-
 
 
 

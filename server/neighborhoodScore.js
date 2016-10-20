@@ -59,19 +59,20 @@ var calcTotalScore = function(weights, scores){
 
 var getScores = function(req, res){
   // for testing ******
-  var priorities = {walkability: 2, crime: 3, commute: 1};
-
-  var userData = {};
-  userData.nearbyRestaurants = new Array(20);
-  userData.nearbyStores = new Array(6);
+  // var priorities = {walkability: 2, crime: 3, commute: 1};
+  //
+  // var userData = {};
+  // userData.nearbyRestaurants = new Array(20);
+  // userData.nearbyStores = new Array(6);
   // userData.commute.duration.value = 3600;
 
-  // var userData = req.query.userData;
-  // var priorities = userData.priorities;
-  // var geolocation = {
-  //   latitude: userData.newAddress.lat,
-  //   longitude: userData.newAddress.lng
-  // };
+  var userData = JSON.parse(req.query.userData);
+  var priorities = userData.priorities;
+  console.log('userData ', userData.newAddress);
+  var geolocation = {
+    latitude: userData.newAddress.lat,
+    longitude: userData.newAddress.lng
+  };
   var scoreWeights = getScoreWeighting(priorities);
 
   var scores = {};
