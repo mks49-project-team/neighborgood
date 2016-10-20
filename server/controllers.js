@@ -88,7 +88,7 @@ var controller = {
 	},
 
 	getScore : function(req, res) {
-
+		console.log('JEFFF req.query:', req.query)
 		// get population density
 		// var userInfo = req.query;
 		var lat = req.query.latitude;
