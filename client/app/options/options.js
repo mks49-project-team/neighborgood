@@ -5,7 +5,6 @@ options.controller('optionsController', function(mainFactory){
 
   var vm = this;
   vm.checkboxes = {
-    // crime: true,
     crimeClicked: 1,
     trafficClicked: 1,
     walkabilityClicked: 1
