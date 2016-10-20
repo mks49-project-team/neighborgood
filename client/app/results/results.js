@@ -91,5 +91,8 @@ results.controller('resultsController', function(mainFactory){
 
 results.controller('scoresController', function(mainFactory){
   var vm = this;
-
+  vm.init = function(){
+    vm.scores = mainFactory.getUserData().neighborhoodResult;
+  }
+  vm.init();
 });
