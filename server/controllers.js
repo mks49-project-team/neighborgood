@@ -89,7 +89,7 @@ var controller = {
 	},
 
 	getScore : function(req, res) {
-		neighbordScore.getScores(req, res);
+		neighborhoodScore.getScores(req, res);
 	}
 
 }
