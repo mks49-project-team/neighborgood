@@ -4,8 +4,8 @@ var options = angular.module('options', ['app.factory']);
 options.controller('optionsController', function(mainFactory, $location){
 
   var vm = this;
+
   vm.priorities = {
-    // crime: true,
     crime: 0,
     commute: 0,
     walkability: 0
