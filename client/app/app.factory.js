@@ -4,6 +4,7 @@ factoryModule.factory('mainFactory', function($http){
   //user OBJECT, stores our user.profile, user.results, everything
   var user = {};
   user.result = {};
+  user.result.checkboxes = {};
 
 
   //uses GOOGLE GEOLOCATION api to grab addressData by address
@@ -204,6 +205,23 @@ factoryModule.factory('mainFactory', function($http){
     }
   }
 
+  var insertCheckboxesData = function(data) {
+    user.result.checkboxes = data;
+    console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
+    console.log('jefffyooo: whats in the user object?:', user)
+    getScore(user);
+  }
+
+  var getScore = function(userData) {
+    console.log('is getScore working?')
+
+    return $http({
+      method: "GET",
+      url: "api/score",
+      params: userData
+    })
+  }
+
   return {
     startupGeoLocation : startupGeoLocation,
     setUserDataFromGeoLocation : setUserDataFromGeoLocation,
@@ -215,6 +233,8 @@ factoryModule.factory('mainFactory', function($http){
     setRestaurantData : setRestaurantData,
     startupStoreLocation : startupStoreLocation,
     setStoreData : setStoreData,
+    insertCheckboxesData : insertCheckboxesData,
+    getScore : getScore,
     user : user // for console.logs
   }
 });
