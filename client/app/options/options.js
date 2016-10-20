@@ -54,18 +54,7 @@ options.controller('optionsController', function(mainFactory, $location){
           .catch(function(err){
             console.log('error getting scores: ', err);
           })
-          // .then(function(response){
-          //   mainFactory.setUserNeighborhoodResult(response);
-          //   console.log('response: ', response);
-          //   $location.path('results');
-          // })
-          // .catch(function(err){
-          //   console.log(err);
-          // });
-        // console.log('response inside getUserData:', response.data.routes[0].legs[0])
-        // console.log('distance:', response.data.routes[0].legs[0].distance)
-        // console.log('duration:', response.data.routes[0].legs[0].duration)
-        // console.log('duration in traffic:', response.data.routes[0].legs[0].duration_in_traffic)
+  
       })
       .catch(function(err) {
         console.log('err in getUserData in startupController:', err)
