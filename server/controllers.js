@@ -90,7 +90,6 @@ var controller = {
 
 	getScore : function(req, res) {
 		neighborhoodScore.getScores(req, res);
-
 	}
 
 }
