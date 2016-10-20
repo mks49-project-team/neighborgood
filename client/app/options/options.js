@@ -4,8 +4,8 @@ var options = angular.module('options', ['app.factory']);
 options.controller('optionsController', function(mainFactory, $location){
 
   var vm = this;
+
   vm.priorities = {
-    // crime: true,
     crime: 1,
     commute: 1,
     walkability: 1
@@ -54,7 +54,7 @@ options.controller('optionsController', function(mainFactory, $location){
           .catch(function(err){
             console.log('error getting scores: ', err);
           })
-  
+
       })
       .catch(function(err) {
         console.log('err in getUserData in startupController:', err)
