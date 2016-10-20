@@ -10,6 +10,7 @@ router.get('/restaurantLocation', controller.getRestaurantLocation);
 router.get('/storeLocation', controller.getStoreLocation);
 router.get('/directions', controller.getDirections);
 router.get('/score', controller.getScore);
+router.post('/post', controller.postData)
 
 module.exports = {
   router: router

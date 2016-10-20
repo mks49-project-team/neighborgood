@@ -221,9 +221,8 @@ factoryModule.factory('mainFactory', function($http){
     //   });
   }
 
-  var getScore = function() {
-    console.log('is getScore working?')
 
+  var getScore = function(userData) {
     return $http({
       method: "GET",
       url: "api/score",
@@ -232,9 +231,24 @@ factoryModule.factory('mainFactory', function($http){
       }
     });
   }
+
   var setUserNeighborhoodResult = function(neighborhoodResult){
     user.result.neighborhoodResult = neighborhoodResult;
     console.log(neighborhoodResult);
+  }
+
+  // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
+  var postData = function(userData) {
+    // JEFF IS LEARNING SOMETHING!!!
+    // data is for post, params is for get
+    // post req.body
+    // get req.query
+    console.log('wtf just went in?', userData);
+    return $http({
+      method: "POST",
+      url: "api/post",
+      data: userData
+    })
   }
 
   return {
@@ -251,6 +265,7 @@ factoryModule.factory('mainFactory', function($http){
     insertPriorities : insertPriorities,
     getScore : getScore,
     setUserNeighborhoodResult : setUserNeighborhoodResult,
+    postData : postData,
     user : user // for console.logs
   }
 });
