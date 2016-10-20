@@ -1,40 +1,36 @@
 <div>
 
-When choosing a place to live, what is important to you?
-
-
-<form ng-submit="vm.optionsGeoLocation()">
-  <input type="text" placeholder="Input your work/school/commute drive address" ng-model="vm.secondAddress">
-</form>
+<h1>When choosing a place to live, what is important to you?</h1>
 
 <div>
+  <!-- Delete this both of this in production -->
+  <p>Sample destination address:</p>
   <h1>17310 Vickie Ave, Cerritos, CA</h1>
 </div>
 
+Insert your work/school/commute address!
+<form ng-submit="vm.optionsGeoLocation()">
+  <input type="text" placeholder="Input your work/school/commute drive address" ng-model="vm.secondAddress">
+
 <h2>Select What Criterias Matter to You</h2>
 
-<!-- can add ng-change and/or ng-submit in the future, depending on needs -->
-<form>
   <label>
-    <input type="checkbox" name="options" ng-model="vm.options.crime"> Crime
+    <input type="checkbox" name="options"  ng-model="vm.checkboxes.crimeClicked" ng-true-value="1" ng-false-value="0"> Crime
   </label>
   <label>
-    <input type="checkbox" name="options" ng-model="vm.options.traffic"> Traffic
+    <input type="checkbox" name="options" ng-model="vm.checkboxes.trafficClicked" ng-true-value="1" ng-false-value="0"> Traffic
   </label>
   <label>
-    <input type="checkbox" name="options" ng-model="vm.options.walkability"> Walkability
+    <input type="checkbox" name="options" ng-model="vm.checkboxes.walkabilityClicked" ng-true-value="1" ng-false-value="0"> Walkability
   </label>
   <button type="submit">Next</button>
 </form>
 
-<!-- SHOWING OFF OUR FORMDATA OBJECT -->
-<h2>Sample Form Object</h2>
 
 <pre>
-  {{vm.options}}
+  <!-- delete both of this in production -->
+  vm.checkboxes 2-way data-binding:
+  {{vm.checkboxes}}
 </pre>
-
-
-
 
 </div>
