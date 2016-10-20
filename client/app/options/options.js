@@ -6,9 +6,9 @@ options.controller('optionsController', function(mainFactory, $location){
   var vm = this;
   vm.priorities = {
     // crime: true,
-    crime: 1,
-    commute: 1,
-    walkability: 1
+    crime: 0,
+    commute: 0,
+    walkability: 0
   };
 
   vm.optionsGeoLocation = function() {
@@ -44,8 +44,11 @@ options.controller('optionsController', function(mainFactory, $location){
     mainFactory.getDirectionsApi(vm.originLat, vm.originLng, vm.destinationLat, vm.destinationLng)
     // console.log('this is vm.getDirectionsApi, checking the response after invoking the function', response)
       .then(function(response) {
-        vm.insertDirectionsData(response.data.routes[0].legs[0]);
-        vm.insertCheckboxesData(vm.priorities);
+        mainFactory.insertDirectionsData(response.data.routes[0].legs[0]);
+        // vm.insertDirectionsData(response.data.routes[0].legs[0]);
+        // vm.insertCheckboxesData(vm.priorities);
+        console.log('priorities: ', vm.priorities);
+        mainFactory.insertPriorities(vm.priorities);
         mainFactory.getScore()
           .then(function(response){
             mainFactory.setUserNeighborhoodResult(response.data);
@@ -54,22 +57,22 @@ options.controller('optionsController', function(mainFactory, $location){
           .catch(function(err){
             console.log('error getting scores: ', err);
           })
-  
+
       })
       .catch(function(err) {
         console.log('err in getUserData in startupController:', err)
       });
   }
-
-  vm.insertDirectionsData = function(data) {
-    console.log("JEFF YOOOO:", data)
-    mainFactory.insertDirectionsData(data)
-  }
-
-  vm.insertCheckboxesData = function(data) {
-    console.log('inside insertCheckboxesData, this is the data being passed:', data)
-    mainFactory.insertCheckboxesData(data);
-  }
+  //
+  // vm.insertDirectionsData = function(data) {
+  //   console.log("JEFF YOOOO:", data)
+  //   mainFactory.insertDirectionsData(data)
+  // }
+  //
+  // vm.insertCheckboxesData = function(data) {
+  //   console.log('inside insertCheckboxesData, this is the data being passed:', data)
+  //   mainFactory.insertCheckboxesData(data);
+  // }
 
 
 

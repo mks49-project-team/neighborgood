@@ -15,13 +15,13 @@ Insert your work/school/commute address!
   <h2>Select What Criterias Matter to You</h2>
 
   <label>
-    <input type="checkbox" name="options"  ng-model="vm.checkboxes.crime" ng-true-value="1" ng-false-value="0"> Crime
+    <input type="checkbox" name="options"  ng-model="vm.priorities.crime" ng-true-value="1" ng-false-value="0"> Crime
   </label>
   <label>
-    <input type="checkbox" name="options" ng-model="vm.checkboxes.commute" ng-true-value="1" ng-false-value="0"> Traffic
+    <input type="checkbox" name="options" ng-model="vm.priorities.commute" ng-true-value="1" ng-false-value="0"> Traffic
   </label>
   <label>
-    <input type="checkbox" name="options" ng-model="vm.checkboxes.walkability" ng-true-value="1" ng-false-value="0"> Walkability
+    <input type="checkbox" name="options" ng-model="vm.priorities.walkability" ng-true-value="1" ng-false-value="0"> Walkability
   </label>
   <button type="submit">Next</button>
 </form>
@@ -30,7 +30,7 @@ Insert your work/school/commute address!
 <pre>
   <!-- delete both of this in production -->
   vm.checkboxes 2-way data-binding:
-  {{vm.checkboxes}}
+  {{vm.priorities}}
 </pre>
 
 </div>

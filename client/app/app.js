@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results']);
+var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores']);
 
 // app.config(function($routeProvider){
 //   $routeProvider

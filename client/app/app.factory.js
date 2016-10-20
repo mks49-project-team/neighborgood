@@ -207,7 +207,7 @@ factoryModule.factory('mainFactory', function($http){
     }
   }
 
-  var insertCheckboxesData = function(data) {
+  var insertPriorities = function(data) {
     user.result.priorities = data;
     // console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
     // console.log('jefffyooo: whats in the user object?:', user)
@@ -248,7 +248,7 @@ factoryModule.factory('mainFactory', function($http){
     setRestaurantData : setRestaurantData,
     startupStoreLocation : startupStoreLocation,
     setStoreData : setStoreData,
-    insertCheckboxesData : insertCheckboxesData,
+    insertPriorities : insertPriorities,
     getScore : getScore,
     setUserNeighborhoodResult : setUserNeighborhoodResult,
     user : user // for console.logs
