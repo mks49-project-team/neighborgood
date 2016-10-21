@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
     .state('startup', {
-      url: '/',
+      url: '/startup',
       templateUrl: 'app/startup/startup.html',
       controller: 'startupController',
       controllerAs: 'vm'
@@ -49,17 +49,36 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-    .state('signin', {
-      url: '/signin',
-      templateUrl: 'app/signin/signin.html',
-      controller: 'signinController',
-      controllerAs: 'vm'
-    })
-    .state('signup', {
-      url: '/signup',
-      templateUrl: 'app/signup/signup.html',
-      controller: 'signupController',
-      controllerAs: 'vm'
-    });
+    .state('auth', {
+      url: '/',
+      templateUrl: 'app/auth.html',
+      views: {
+        '': {
+          templateUrl: 'app/auth.html'
+        },
+        'signin@auth': {
+          templateUrl: 'app/signin/signin.html',
+          controller: 'signinController',
+          controllerAs: 'vm'
+        },
+        'signup@auth': {
+          templateUrl: 'app/signup/signup.html',
+          controller: 'signupController',
+          controllerAs: 'vm'
+        }
+     }
+   });
+    // .state('signin', {
+    //   url: '/signin',
+    //   templateUrl: 'app/signin/signin.html',
+    //   controller: 'signinController',
+    //   controllerAs: 'vm'
+    // })
+    // .state('signup', {
+    //   url: '/signup',
+    //   templateUrl: 'app/signup/signup.html',
+    //   controller: 'signupController',
+    //   controllerAs: 'vm'
+    // });
 
 });

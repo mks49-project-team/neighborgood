@@ -1,4 +1,4 @@
-var signin = angular.module('signin', ['app.factory.js']);
+var signin = angular.module('signin', ['app.factory']);
 
 signin.controller('signinController', function(authentication, $location){
   var vm = this;
