@@ -238,18 +238,18 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
-  var postData = function(userData) {
-    // JEFF IS LEARNING SOMETHING!!!
-    // data is for post, params is for get
-    // post req.body
-    // get req.query
-    console.log('wtf just went in?', userData);
-    return $http({
-      method: "POST",
-      url: "api/post",
-      data: userData
-    })
-  }
+  // var postData = function(userData) {
+  //   // JEFF IS LEARNING SOMETHING!!!
+  //   // data is for post, params is for get
+  //   // post req.body
+  //   // get req.query
+  //   console.log('wtf just went in?', userData);
+  //   return $http({
+  //     method: "POST",
+  //     url: "api/post",
+  //     data: userData
+  //   })
+  // }
 
   return {
     startupGeoLocation : startupGeoLocation,
@@ -265,7 +265,7 @@ factoryModule.factory('mainFactory', function($http){
     insertPriorities : insertPriorities,
     getScore : getScore,
     setUserNeighborhoodResult : setUserNeighborhoodResult,
-    postData : postData,
+    // postData : postData,
     user : user // for console.logs
   }
 });
