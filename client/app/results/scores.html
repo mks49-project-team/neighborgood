@@ -3,10 +3,12 @@
   <div id='score-box'>
 
     <div id='total-score'>
-      {{vm.scores.total}}
+      {{vm.scoreDisplay}}
     </div>
 
+    <a ng-click="vm.renderChart()" href="">See breakdown</a>
     <div id='scores-chart'></div>
+
 
   </div>
 

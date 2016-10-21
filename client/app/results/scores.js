@@ -3,10 +3,10 @@ var scores = angular.module('scores', ['app.factory']);
 scores.controller('scoresController', function(mainFactory){
   var vm = this;
   vm.chart = null;
+  vm.scores = null;
+  vm. neighborhood = null;
 
   var setColors = function(chartData){
-    console.log('chartdata: ', chartData);
-    //var colors = {};
     return chartData.reduce(function(colors, category){
       console.log(colors);
       if(category[1] < 40){
@@ -19,16 +19,13 @@ scores.controller('scoresController', function(mainFactory){
       return colors;
     }, {});
   }
-  var init = function(){
-    //var scores = mainFactory.getUserData().result.neighborhoodResult;
-    //var neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+
+  vm.renderChart = function(){
     // generate data for bar chart
-    var neighborhood = 'la'
-    var scores = {safety: 40, walk: 3, total: 76};
     var chartData = [];
 
-    for(var key in scores){
-        chartData.push([key, scores[key]]);
+    for(var key in vm.scores){
+        chartData.push([key, vm.scores[key]]);
     }
     // sort categories so they always appear in same order
     chartData.sort(function(a,b){
@@ -54,8 +51,8 @@ scores.controller('scoresController', function(mainFactory){
     vm.chart = c3.generate({
         bindto: '#scores-chart',
         size: {
-          width: 250,
-          height: 200
+          width: 200,
+          height: 180
         },
         data: {
           columns : chartBlankData,//chartData,
@@ -65,10 +62,6 @@ scores.controller('scoresController', function(mainFactory){
         axis: {
           x: {
             type: 'category',
-            padding: {
-              left: 0,
-              right: 0
-            },
             tick:{
               count: 0
             }
@@ -89,7 +82,7 @@ scores.controller('scoresController', function(mainFactory){
         tooltip: {
           grouped: false,
           format: {
-            title: function(x) {return neighborhood;}
+            title: function(x) {return vm.neighborhood;}
           }
         }
     });
@@ -100,7 +93,14 @@ scores.controller('scoresController', function(mainFactory){
       })
     }, 250);
   }
+
+  var init = function(){
+    vm.scores = mainFactory.getUserData().result.neighborhoodResult;
+    vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+    vm.scoreDisplay = vm.scores.total + '/100';
+    // vm.neighborhood = 'la';
+    // vm.scores = {safety: 40, walk: 3, total: 76};
+
+  }
   init();
-
-
 })

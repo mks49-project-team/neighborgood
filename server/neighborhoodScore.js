@@ -5,19 +5,19 @@ console.log(crime)
 var getCommuteScore = function(time){
   // time in minutes
   // scoring method:
-  // range from 0 (worst) to 1 (best)
-  // commute < 20 min --> 1
+  // range from 0 (worst) to 100 (best)
+  // commute < 20 min --> 100
   // commute > 120 min --> 0
-  return time < 20 ? 1 : 1 - (time - 20) / 100;
+  return time < 20 ? 100 : Math.round(100 - (time - 20));
 }
 
 var getWalkabilityScore = function(restaurants, stores){
   // scoring method:
   // range from 0 (worst) to 1 (best)
   // stores/restaurants = 0 --> 0
-  // stores/restaurants >= 20 --> 1
+  // stores/restaurants >= 20 --> 100
   var total = restaurants.length + stores.length;
-  return total > 20 ? 1 : 1 - (20 - total) / 20;
+  return total > 20 ? 100 : Math.round(100 - (20 - total) * 5);
 }
 
 var getScoreWeighting = function(priorities){
@@ -86,10 +86,10 @@ var getScores = function(req, res){
   if (priorities.walkability) {
     scores.walkability = getWalkabilityScore(userData.nearbyRestaurants, userData.nearbyStores);
   }
-  if (priorities.crime) {
+  if (priorities.safety) {
     crime.getCrimeScore(req)
-      .then(function(crimeScore){
-        scores.crime = crimeScore;
+      .then(function(safetyScore){
+        scores.safety = safetyScore;
         scores.total = calcTotalScore(scoreWeights, scores);
         res.json(scores);
       })
