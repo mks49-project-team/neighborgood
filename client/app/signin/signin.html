@@ -1,0 +1,25 @@
+<div>
+
+    <h1>Sign In</h1>
+    <form ng-submit="vm.signin()">
+      <div>
+        <label>Username</label>
+        <input type="text" ng-model="vm.username" required></input>
+        <span ng-show="form.username.$dirty && form.username.$error.required">Username is required</span>
+      </div>
+
+      <div>
+        <label>Password</label>
+        <input type="password" ng-model="vm.password" required></input>
+        <span ng-show="form.password.$dirty && form.username.$error.required">Password is required</span>
+      </div>
+
+      <div>
+        <button type="submit" ng-disabled="form.$invalid">Sign In</button>
+        <a href="#/signup">Sign Up</a>
+      </div>
+
+    </form>
+
+
+</div>
