@@ -12,6 +12,7 @@ options.controller('optionsController', function(mainFactory, $location){
   };
 
   vm.optionsGeoLocation = function() {
+    if (vm.secondAddress) {
     mainFactory.startupGeoLocation(vm.secondAddress)
      .then(function(response) {
       console.log('this is optionsControllers response.data:', response.data)
@@ -20,9 +21,18 @@ options.controller('optionsController', function(mainFactory, $location){
       console.log('is this the user object?:', mainFactory.user)
       vm.getUserData();
     })
-      .catch(function(err) {
-        console.log('err in options.controller, optionsGeoLocation:', err)
-      })
+    } else {
+      mainFactory.insertPriorities(vm.priorities);
+        mainFactory.getScore()
+          .then(function(response){
+            mainFactory.setUserNeighborhoodResult(response.data);
+            $location.path('results');
+          })
+          .catch(function(err){
+            console.log('error getting scores: ', err);
+          })
+    }
+
   },
 
   vm.getUserData = function() {
