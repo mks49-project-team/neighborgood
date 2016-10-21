@@ -3,67 +3,56 @@ var scores = angular.module('scores', ['app.factory']);
 scores.controller('scoresController', function(mainFactory){
   var vm = this;
   vm.chart = null;
-  var showChart = function(){
+
+  var init = function(){
+    //var scores = mainFactory.getUserData().result.neighborhoodResult;
+    // generate data for bar chart
+    var scores = {safety: 40, walk: 80, a: 90};
+    var chartData = [];
+    for(var key in scores){
+      chartData.push([key, scores[key]]);
+    }
+    // sort categories so they always appear in same order
+    chartData.sort(function(a,b){
+      if (a[0] < b[0]) {
+        return -1;
+      }
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(chartData);
     vm.chart = c3.generate({
         bindto: '#scores-chart',
+        size: {
+          width: 300,
+          height: 300
+        },
         data: {
-          columns: [['data1', 50, 100, 60]],
+          columns : chartData,
           type: 'bar'
         },
         bar: {
           width: {
-            ratio: 0.8
+            ratio: 0.5
+          }
+        },
+        axis: {
+          y: {
+            label: {
+              text: 'Score',
+              position: 'outer-middle'
+            }
           }
         }
+    });
+
+    vm.chart.data.colors({
+
     })
   }
-  showChart();
-  // vm.options = {
-  //   data: [
-  //     {
-  //       safety: 80
-  //     },
-  //     {
-  //       walkability: 60
-  //     },
-  //     {
-  //       commute: 70
-  //     }
-  //   ],
-  //   dimensions: {
-  //     safety: {
-  //       type: 'bar',
-  //       dataType: 'numeric',
-  //       show: true
-  //     },
-  //     walkability: {
-  //       type: 'bar',
-  //       dataType: 'numeric',
-  //       show: true
-  //     },
-  //     commute: {
-  //       type: 'bar',
-  //       dataType: 'numeric',
-  //       show: true
-  //     }
-  //   },
-  //   chart: {
-  //
-  //   },
-  //   state: {
-  //
-  //   }
-  // }
-  // vm.instance = null;
-  // vm.instance = chart.flow({
-  //   columns: [
-  //     ['safety', 'commute'],
-  //     ['data1', 50, 60]
-  //   ]
-  // });
-  // vm.scores = 90;
-  // var init = function(){
-  //   vm.scores = mainFactory.getUserData().result.neighborhoodResult;
-  // }
-  // init();
+  init();
+
+
 })
