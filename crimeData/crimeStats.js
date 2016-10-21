@@ -136,8 +136,8 @@ var getCrimeScore = function(req){
         }
       }
       // assign weights to each category based on seriousness of offense
-      // safest = 1, most dangerous = 0
-      var crimeScore = 1 - (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10;
+      // safest = 100, most dangerous = 0
+      var crimeScore = Math.round((1 - (4 * diffs.homicide + 3 * diffs.rape + 2 * diffs.robbery + 1 * diffs.assault) / 10) * 100);
       resolve(crimeScore);
     });
 

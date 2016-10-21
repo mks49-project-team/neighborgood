@@ -6,7 +6,7 @@ options.controller('optionsController', function(mainFactory, $location){
   var vm = this;
 
   vm.priorities = {
-    crime: 0,
+    safety: 0,
     commute: 0,
     walkability: 0
   };
