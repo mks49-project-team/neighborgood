@@ -51,7 +51,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('auth', {
       url: '/',
-      templateUrl: 'app/auth.html',
       views: {
         '': {
           templateUrl: 'app/auth.html'

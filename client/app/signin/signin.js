@@ -12,7 +12,7 @@ signin.controller('signinController', function(authentication, $location){
   vm.signin = function(){
     authentication.signin(vm.user, function(success){
       if(success) {
-        $location.path('/');
+        $location.path('/startup');
       } else {
         vm.error = true;
       }

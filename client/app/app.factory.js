@@ -270,7 +270,7 @@ factoryModule.factory('mainFactory', function($http){
   }
 });
 
-factoryModule.factory('authentication', function($http, $localStorage){
+factoryModule.factory('authentication', function($http, $window){
   var signin = function(user, callback) {
     $http({
       method: 'POST',
@@ -280,7 +280,7 @@ factoryModule.factory('authentication', function($http, $localStorage){
     .then(function(response){
       if(response.data.token){
         // successful signin
-        $localStorage.user = {
+        $window.localStorage.user = {
           username: username,
           token: response.data.token
         };
@@ -306,7 +306,7 @@ factoryModule.factory('authentication', function($http, $localStorage){
 
 
   var signout = function(){
-    delete $localStorage.user;
+    delete $window.localStorage.user;
     $http.defaults.headers.common['Auth-Token'] = '';
   }
 
