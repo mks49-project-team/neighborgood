@@ -5,6 +5,7 @@ scores.controller('scoresController', function(mainFactory){
   vm.chart = null;
   vm.scores = null;
   vm. neighborhood = null;
+  vm.showDetailsText = false;
 
   var setColors = function(chartData){
     return chartData.reduce(function(colors, category){
@@ -20,7 +21,8 @@ scores.controller('scoresController', function(mainFactory){
     }, {});
   }
 
-  vm.renderChart = function(){
+  vm.showDetails = function(){
+    vm.showDetailsText = true;
     // generate data for bar chart
     var chartData = [];
 
@@ -90,16 +92,17 @@ scores.controller('scoresController', function(mainFactory){
     setTimeout(function(){
       vm.chart.load({
         columns: chartData
-      })
+      });
+
     }, 250);
   }
 
   var init = function(){
-    vm.scores = mainFactory.getUserData().result.neighborhoodResult;
-    vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+    // vm.scores = mainFactory.getUserData().result.neighborhoodResult;
+    // vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+    vm.scores = {safety: 40, walk: 3, total: 76};
     vm.scoreDisplay = vm.scores.total + '/100';
-    // vm.neighborhood = 'la';
-    // vm.scores = {safety: 40, walk: 3, total: 76};
+    vm.neighborhood = 'la';
 
   }
   init();
