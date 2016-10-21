@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores']);
+var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup']);
 
 // app.config(function($routeProvider){
 //   $routeProvider
@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
     .state('startup', {
-      url: '/',
+      url: '/startup',
       templateUrl: 'app/startup/startup.html',
       controller: 'startupController',
       controllerAs: 'vm'
@@ -48,6 +48,36 @@ app.config(function($stateProvider, $urlRouterProvider){
           controllerAs: 'vm'
         }
       }
-    });
+    })
+    .state('auth', {
+      url: '/',
+      views: {
+        '': {
+          templateUrl: 'app/auth.html'
+        },
+        'signin@auth': {
+          templateUrl: 'app/signin/signin.html',
+          controller: 'signinController',
+          controllerAs: 'vm'
+        },
+        'signup@auth': {
+          templateUrl: 'app/signup/signup.html',
+          controller: 'signupController',
+          controllerAs: 'vm'
+        }
+     }
+   });
+    // .state('signin', {
+    //   url: '/signin',
+    //   templateUrl: 'app/signin/signin.html',
+    //   controller: 'signinController',
+    //   controllerAs: 'vm'
+    // })
+    // .state('signup', {
+    //   url: '/signup',
+    //   templateUrl: 'app/signup/signup.html',
+    //   controller: 'signupController',
+    //   controllerAs: 'vm'
+    // });
 
 });

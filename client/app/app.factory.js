@@ -269,3 +269,50 @@ factoryModule.factory('mainFactory', function($http){
     user : user // for console.logs
   }
 });
+
+factoryModule.factory('authentication', function($http, $window){
+  var signin = function(user, callback) {
+    $http({
+      method: 'POST',
+      url: '/api/users/signin',
+      data: user
+    })
+    .then(function(response){
+      if(response.data.token){
+        // successful signin
+        $window.localStorage.user = {
+          username: username,
+          token: response.data.token
+        };
+        // set authorization header
+        $http.defaults.headers.common['Auth-Token'] = response.data.token;
+        callback(true);
+      } else {
+        callback(false);
+      }
+    });
+  }
+
+  var signup = function(user) {
+    return $http({
+      method: 'POST',
+      url: '/api/users/signup',
+      data: user
+    })
+    .then(function(response){
+      return response.data.token;
+    });
+  }
+
+
+  var signout = function(){
+    delete $window.localStorage.user;
+    $http.defaults.headers.common['Auth-Token'] = '';
+  }
+
+  return {
+    signin: signin,
+    signup: signup,
+    signout: signout
+  }
+});

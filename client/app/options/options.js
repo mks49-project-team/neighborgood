@@ -74,6 +74,6 @@ options.controller('optionsController', function(mainFactory, $location){
   //   mainFactory.insertCheckboxesData(data);
   // }
 
-
+}
 
 });
