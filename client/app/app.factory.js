@@ -270,7 +270,7 @@ factoryModule.factory('mainFactory', function($http){
   }
 });
 
-factoryModule.factory('authentication', function($http, $window){
+factoryModule.factory('userFactory', function($http, $window){
   var signin = function(user, callback) {
     $http({
       method: 'POST',

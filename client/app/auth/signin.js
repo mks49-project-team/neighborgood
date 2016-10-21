@@ -1,16 +1,16 @@
 var signin = angular.module('signin', ['app.factory']);
 
-signin.controller('signinController', function(authentication, $location){
+signin.controller('signinController', function(userFactory, $location){
   var vm = this;
   vm.user = {};
   vm.showErrorMsg = false;
 
   var init = function() {
-    authentication.signout();
+    userFactory.signout();
   }
 
   vm.signin = function(){
-    authentication.signin(vm.user, function(success){
+    userFactory.signin(vm.user, function(success){
       if(success) {
         $location.path('/startup');
       } else {

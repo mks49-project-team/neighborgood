@@ -1,23 +1,5 @@
-var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup']);
+var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup', 'savedSearches']);
 
-// app.config(function($routeProvider){
-//   $routeProvider
-//     .when('/', {
-//       templateUrl: 'app/startup/startup.html',
-//       controller: 'startupController',
-//       controllerAs: 'vm'
-//     })
-//     .when('/options', {
-//       templateUrl: 'app/options/options.html',
-//       controller: 'optionsController',
-//       controllerAs: 'vm'
-//     })
-//     .when('/results', {
-//       templateUrl: 'app/results/results.html',
-//       controller: 'resultsController',
-//       controllerAs: 'vm'
-//     });
-// })
 app.config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/');
 
@@ -53,31 +35,25 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/',
       views: {
         '': {
-          templateUrl: 'app/auth.html'
+          templateUrl: 'app/auth/auth.html'
         },
         'signin@auth': {
-          templateUrl: 'app/signin/signin.html',
+          templateUrl: 'app/auth/signin.html',
           controller: 'signinController',
           controllerAs: 'vm'
         },
         'signup@auth': {
-          templateUrl: 'app/signup/signup.html',
+          templateUrl: 'app/auth/signup.html',
           controller: 'signupController',
           controllerAs: 'vm'
         }
      }
+   })
+   .state('savedSearches', {
+     url: '/savedSearches',
+     templateUrl: 'app/savedSearches/savedSearches.html',
+     controller: 'savedSearchesController',
+     controllerAs: 'vm'
    });
-    // .state('signin', {
-    //   url: '/signin',
-    //   templateUrl: 'app/signin/signin.html',
-    //   controller: 'signinController',
-    //   controllerAs: 'vm'
-    // })
-    // .state('signup', {
-    //   url: '/signup',
-    //   templateUrl: 'app/signup/signup.html',
-    //   controller: 'signupController',
-    //   controllerAs: 'vm'
-    // });
 
 });
