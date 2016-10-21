@@ -3,11 +3,27 @@
   <div id='score-box'>
 
     <div id='total-score'>
-      {{vm.scoreDisplay}}
+      <span id='total-score-text'>Score</span>
+      <span id='total-score-value'>{{vm.scoreDisplay}}</span>
     </div>
 
-    <a ng-click="vm.renderChart()" href="">See breakdown</a>
+    <a ng-click="vm.showDetails()" href="">details</a>
     <div id='scores-chart'></div>
+    <div id='scoring-info' ng-show='vm.showDetailsText'>
+      <p>
+        Our scores range from 0 (worst) to 100 (best). The total score represents
+        an average of the individual score for each category.
+      </p>
+      <p>
+        Safety scores are calculated based on
+        <a href='https://data.lacity.org/A-Safe-City/Crimes-2012-2015/s9rj-h3s6'>crime data</a>
+        reported for California in 2015.The dataset is filtered for violent crimes
+        (homicide, rape, robbery and assault)reported within 5 km of the user's address. Crime rates are estimated using
+        <a href="http://www.datasciencetoolkit.org/developerdocs#coordinates2statistics">population density data</a>
+        for the area, compared to the range of crime rates reported for cities in LA and assigned a score based on where
+        the neighborhood's crime rates fall.
+      </p>
+    </div>
 
 
   </div>
