@@ -56,7 +56,7 @@ var signup = function(req, res){
             console.log('error saving new account: ', err);
             res.send(500);
           }
-          var payload = {iss: account.username};
+          var payload = {iss: username};
           var token = jwt.encode(payload, 'neighborgood_secret');
 
           res.json({token: token});
