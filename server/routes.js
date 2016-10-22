@@ -11,11 +11,12 @@ router.get('/restaurantLocation', controller.getRestaurantLocation);
 router.get('/storeLocation', controller.getStoreLocation);
 router.get('/directions', controller.getDirections);
 router.get('/score', controller.getScore);
-// router.post('/post', controller.postData)
 router.post('/users/signin', controller.signin);
 router.post('/users/signup', controller.signup);
 router.get('/users/accounts', controller.getAccounts);
-// router.get('/users/:username/savedSearches', jwtAuthentication, controller.getSearches);
+router.get('/users/:username/searches', controller.getUserSearches);
+router.post('/users/:username/searches', controller.postUserSearch);
+
 module.exports = {
   router: router
 };

@@ -4,6 +4,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   var vm = this;
 
 
+
 /////////  BELOW IS SERGY WORKING... :)
 
 
@@ -49,7 +50,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   // };
 
   // vm.renderSavedMaps = function(selectionUser) {
-  	
+
   // 	var item = selectionUser || 0;
   // 	// if there are addresses destination that were entered
   // 	if (vm.maps.length > 0) {
@@ -69,7 +70,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   // 		// 	}
   // 		// })
 
-  // 	} //if there ARE NO ADDRESSES to desitnations, 
+  // 	} //if there ARE NO ADDRESSES to desitnations,
   // 	else {
   // 		eXampleData.forEach(function(obj) {
   // 			if (!obj[i].destination) {
@@ -77,7 +78,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   // 			}
   // 		})
   // 	}
-  	
+
   // }
   // //user clicks on item in unorderedlist and runs:
   // vm.renderMarker = function(obj) {
@@ -97,16 +98,23 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   // 		content: msgSave
   // 	})
   // 	google.maps.event.addListener(markerSave, 'click', function() {
-           
+
   //               infowindowSave.open(mapSave, markerSave)
 
-                
+
   //       })
   // }
 
-  
 
-  
 
+
+
+
+
+  userFactory.getUserSearches()
+    .then(function(results){
+      vm.x = results;
+    })
+  //console.log(typeof vm.x);
 
 });

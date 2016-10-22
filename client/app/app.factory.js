@@ -264,9 +264,7 @@ factoryModule.factory('mainFactory', function($http){
     setStoreData : setStoreData,
     insertPriorities : insertPriorities,
     getScore : getScore,
-    setUserNeighborhoodResult : setUserNeighborhoodResult,
-    // postData : postData,
-    user : user // for console.logs
+    setUserNeighborhoodResult : setUserNeighborhoodResult
   }
 });
 
@@ -281,6 +279,7 @@ factoryModule.factory('userFactory', function($http, $window){
       if(response.data.token){
         // successful signin
         $window.localStorage.token = response.data.token;
+        $window.localStorage.user = user.username;
         // set authorization header
         $http.defaults.headers.common['x-access-token'] = response.data.token;
         return true;
@@ -298,8 +297,8 @@ factoryModule.factory('userFactory', function($http, $window){
     })
     .then(function(response){
       if(response.data !== "exists" && response.data.token) {
-        console.log(response.data.token);
         $window.localStorage.token = response.data.token;
+        $window.localStorage.user = user.username;
         $http.defaults.headers.common['x-access-token'] = response.data.token;
       }
       return response;
@@ -308,13 +307,40 @@ factoryModule.factory('userFactory', function($http, $window){
 
 
   var signout = function(){
+    delete $window.localStorage.token;
     delete $window.localStorage.user;
     $http.defaults.headers.common['x-access-token'] = '';
+  }
+
+  var saveUserSearch = function(search) {
+    return $http({
+      method: 'POST',
+      url: '/api/users/' + $window.localStorage.user + '/searches',
+      data: {
+        search: search
+      }
+    })
+    .then(function(response){
+      return JSON.parse(response.data);
+    });
+  }
+
+  var getUserSearches = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/users/' + $window.localStorage.user + '/searches',
+    })
+    .then(function(response){
+      console.log('asdfjakld;: ', Array.isArray(response.data));
+      return response.data;
+    });
   }
 
   return {
     signin: signin,
     signup: signup,
-    signout: signout
+    signout: signout,
+    saveUserSearch: saveUserSearch,
+    getUserSearches: getUserSearches
   }
 });
