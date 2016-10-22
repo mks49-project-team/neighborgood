@@ -74,9 +74,9 @@ var jwtAuthentication = function(req, res, next){
   if(token){
     var decoded = jwt.decode(token, 'neighborgood_secret');
     Accounts.findOne({username: decoded.iss})
-      .then(function(user){
-        if(user){
-          req.body.username = user.username;
+      .then(function(account){
+        if(account){
+          req.body.username = account.username;
           next();
           //res.send(200);
         } else { // user doesn't exist
@@ -85,7 +85,7 @@ var jwtAuthentication = function(req, res, next){
       })
       .catch(function(err){
         console.log('error verifying token: ', err);
-        res.send(401);
+        res.send(err);
       });
   } else { // no token
     res.send(401);
@@ -97,6 +97,31 @@ var getAccounts = function(req, res){
   Accounts.find({}, function(err, accounts){
     res.send(accounts);
   });
+}
+
+var getUserSearches = function(req, res){
+  var username = req.params.username;
+  Accounts.findOne({username: username})
+    .then(function(account){
+        res.send(account.results);
+
+    })
+    .catch(function(err){
+      res.send(err);
+    });
+}
+
+var postUserSearch = function(req, res){
+  var username = req.params.username;
+  var search = req.body.search;
+
+  Accounts.findOne({username: username})
+    .then(function(account){
+      account.results.push(search);
+      account.markModified('results');
+      account.save();
+      res.status(200).json(account.results);
+    });
 }
 
 // var accounts = function(userData) {
@@ -172,5 +197,7 @@ module.exports = {
   signin: signin,
   signup: signup,
   jwtAuthentication: jwtAuthentication,
-  getAccounts: getAccounts
+  getAccounts: getAccounts,
+  getUserSearches: getUserSearches,
+  postUserSearch: postUserSearch
 }
