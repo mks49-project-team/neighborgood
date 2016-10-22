@@ -16,6 +16,8 @@
     <div>
       <button type="submit" ng-disabled="form.$invalid">Sign Up</button>
     </div>
+
+    <span ng-show="vm.showErrorMsg">Username already exists</span>
   </form>
 
 </div>

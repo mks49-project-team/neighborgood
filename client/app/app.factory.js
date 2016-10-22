@@ -280,12 +280,9 @@ factoryModule.factory('userFactory', function($http, $window){
     .then(function(response){
       if(response.data.token){
         // successful signin
-        $window.localStorage.user = {
-          username: username,
-          token: response.data.token
-        };
+        $window.localStorage.token = response.data.token;
         // set authorization header
-        $http.defaults.headers.common['Auth-Token'] = response.data.token;
+        $http.defaults.headers.common['x-access-token'] = response.data.token;
         callback(true);
       } else {
         callback(false);
@@ -300,7 +297,12 @@ factoryModule.factory('userFactory', function($http, $window){
       data: user
     })
     .then(function(response){
-      return response.data.token;
+      if(response.data !== "exists" && response.data.token) {
+        console.log(response.data.token);
+        $window.localStorage.token = response.data.token;
+        $http.defaults.headers.common['x-access-token'] = response.data.token;
+      }
+      return response;
     });
   }
 

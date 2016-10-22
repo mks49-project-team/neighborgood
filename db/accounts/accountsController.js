@@ -16,14 +16,11 @@ var signin = function(req, res){
         if(account.checkPassword(user.password)){
           var payload = {iss: user.username};
           var token = jwt.encode(payload,'neighborgood_secret'); /*app.get('jwtTokenSecret'*));*/
-          res.json({
-            token: token,
-            account: account.toJSON()
-          });
-        } else {
-          // incorrect password
-          res.send(401);
+          res.json({token: token});
         }
+        // incorrect password
+        res.send(401);
+
       }
     })
     .catch(function(err){
@@ -36,7 +33,7 @@ var signup = function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
-  // res.send('inside controller');
+
   Accounts.findOne({username: username}, function(err, account){
     if(err){
       console.log('error saving new account: ', err);
@@ -44,7 +41,7 @@ var signup = function(req, res){
     } else {
       if (account) {
         console.log('user already exists: ', account);
-        res.send(401);
+        res.send("exists");
       } else {
         var newAccount = new Accounts({
           username: username,
@@ -59,10 +56,7 @@ var signup = function(req, res){
           var token = jwt.encode(payload, 'neighborgood_secret');
           console.log('token: ', token);
 
-          res.json({
-            token: token,
-            account: account.toJSON()
-          });
+          res.json({token: token});
 
         });
       }
@@ -75,7 +69,7 @@ var verifyToken = function(req, res, next){
 
   var token = req.headers['x-access-token'];
   if(token){
-    var decoded = jwt.decode(token, app.get('jwtTokenSecret'));
+    var decoded = jwt.decode(token, 'neighborgood_secret');
     Accounts.findOne({username: decoded.iss})
       .then(function(user){
         if(user){
