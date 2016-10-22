@@ -5,10 +5,6 @@ signin.controller('signinController', function(userFactory, $location){
   vm.user = {};
   vm.showErrorMsg = false;
 
-  // var init = function() {
-  //   userFactory.signout();
-  // }
-
   vm.signin = function(){
     userFactory.signin(vm.user)
       .then(function(success){
@@ -18,14 +14,7 @@ signin.controller('signinController', function(userFactory, $location){
           vm.showErrorMsg = true;
         }
       })
-    // userFactory.signin(vm.user, function(success){
-    //   if(success) {
-    //     $location.path('/savedSearches');
-    //   } else {
-    //     vm.showErrorMsg = true;
-    //   }
-    // });
   }
-  // init();
+
 
 });

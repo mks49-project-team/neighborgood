@@ -108,8 +108,12 @@ var controller = {
 		accountsController.getAccounts(req, res);
 	},
 
-	getSearches: function(req, res) {
-		res.send('inside getsearches');
+	getUserSearches: function(req, res) {
+		accountsController.getUserSearches(req, res);
+	},
+
+	postUserSearch: function(req, res) {
+		accountsController.postUserSearch(req, res);
 	}
 
 	// postData : function(req, res) {
