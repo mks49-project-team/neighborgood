@@ -31,7 +31,9 @@ results.controller('resultsController', function(mainFactory){
     })
 
       home.setAnimation(google.maps.Animation.BOUNCE);
-
+    var homeinfo = new google.maps.InfoWindow({
+          content: '<h1> ' + resPath.newAddress.full + '</hi>'
+        });
       // function toggleBounce() {
       //   if (home.getAnimation() !== null) {
       //     home.setAnimation(null);
@@ -40,9 +42,20 @@ results.controller('resultsController', function(mainFactory){
       //   }
       // }
 
-
-
-
+      if (resPath.destinationAddress !== undefined) {
+        var commute = new google.maps.Marker({
+          position: {lat : resPath.destinationAddress.lat, lng : resPath.destinationAddress.lng},
+          map: vm.map,
+          icon: {url:'http://maps.gstatic.com/mapfiles/place_api/icons/camping-71.png', scaledSize: new google.maps.Size(30,30)},
+          title: 'Commute Destination'
+        })
+        var commuteinfo = new google.maps.InfoWindow({
+            content: '<h1> ' + resPath.destinationAddress.full + '</hi>'
+          });
+        google.maps.event.addListener(commute, 'click', function() {
+        commuteinfo.open(vm.map, commute)
+      })
+      }
   	//universalMarkerMaker 2 params, type (store, restaurant) and data
   	var universalMarkerMaker = function(type) {
       var iconMaker = function (icon) {
@@ -56,6 +69,18 @@ results.controller('resultsController', function(mainFactory){
          return ans;
       };
 
+      var infowindowCreator = function(message) {
+        return new google.maps.InfoWindow({
+          content: message
+        });
+      };
+
+      var ratingStringGenerator = function(num) {
+        if (num === undefined) {return ' price rating is not listed '}
+        var rating = ['free', '$', '$$', '$$$', '$$$$'];
+        return rating[num]
+      };
+
   		if (type === 'store') {
   			resPath.nearbyStores.forEach(
   				function(item){
@@ -67,6 +92,19 @@ results.controller('resultsController', function(mainFactory){
   						icon: iconPlace,
               title: item.name
   					})
+            var msg = '<div id="content">' + 
+                      '<h1>' + item.name + '</h1>' + 
+                      '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>'+ ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
+                      '</div> </div>'
+           var infowindow = infowindowCreator(msg)
+           google.maps.event.addListener(marker, 'click', function() {
+           
+                infowindow.open(vm.map, marker)
+
+                
+        })
+           console.log(infowindow, 'this is stores info window');
+
   				})
   		} else if (type === 'restaurant') {
   			resPath.nearbyRestaurants.forEach(
@@ -77,13 +115,31 @@ results.controller('resultsController', function(mainFactory){
   					var marker = new google.maps.Marker({
   						position: {lat : item.lat, lng : item.lng},
   						map: vm.map,
-  						icon: iconPlace
+  						icon: iconPlace,
+              title: item.name
   					})
+            var msg = '<div id="content">' + 
+                      '<h1>' + item.name + '</h1>' + 
+                      '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>' + ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
+                      '</div> </div>'
+            var infowindow = infowindowCreator(msg);
+            google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(vm.map, marker)
+        })
   				})
   		}
+
   	}
+
+    google.maps.event.addListener(home, 'click', function() {
+      homeinfo.open(vm.map, home)
+    })
+
+    
+
   	universalMarkerMaker('store')
   	universalMarkerMaker('restaurant')
   }
+  vm.initMap();
   console.log('inside resultsController');
 });
