@@ -271,8 +271,8 @@ factoryModule.factory('mainFactory', function($http){
 });
 
 factoryModule.factory('userFactory', function($http, $window){
-  var signin = function(user, callback) {
-    $http({
+  var signin = function(user) {
+    return $http({
       method: 'POST',
       url: '/api/users/signin',
       data: user
@@ -283,9 +283,9 @@ factoryModule.factory('userFactory', function($http, $window){
         $window.localStorage.token = response.data.token;
         // set authorization header
         $http.defaults.headers.common['x-access-token'] = response.data.token;
-        callback(true);
+        return true;
       } else {
-        callback(false);
+        return false;
       }
     });
   }
@@ -309,7 +309,7 @@ factoryModule.factory('userFactory', function($http, $window){
 
   var signout = function(){
     delete $window.localStorage.user;
-    $http.defaults.headers.common['Auth-Token'] = '';
+    $http.defaults.headers.common['x-access-token'] = '';
   }
 
   return {

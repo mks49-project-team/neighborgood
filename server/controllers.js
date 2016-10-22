@@ -106,6 +106,10 @@ var controller = {
 
 	getAccounts: function(req, res) {
 		accountsController.getAccounts(req, res);
+	},
+
+	getSearches: function(req, res) {
+		res.send('inside getsearches');
 	}
 
 	// postData : function(req, res) {

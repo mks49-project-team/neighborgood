@@ -5,21 +5,25 @@ var jwt = require('jwt-simple');
 
 
 var signin = function(req, res){
-  var user = req.body.user;
-  Accounts.findOne({username: user.username})
+  var username = req.body.username;
+  var password = req.body.password;
+
+  Accounts.findOne({username: username})
     .then(function(account){
       if(!account){
         // user not found
-        res.send(401);
+        res.send("incorrect");
       } else {
         // check password
-        if(account.checkPassword(user.password)){
-          var payload = {iss: user.username};
+        if(account.checkPassword(password)){
+          var payload = {iss: username};
           var token = jwt.encode(payload,'neighborgood_secret'); /*app.get('jwtTokenSecret'*));*/
           res.json({token: token});
+        } else{
+          // incorrect password
+          res.send("incorrect");
+
         }
-        // incorrect password
-        res.send(401);
 
       }
     })
@@ -54,7 +58,6 @@ var signup = function(req, res){
           }
           var payload = {iss: account.username};
           var token = jwt.encode(payload, 'neighborgood_secret');
-          console.log('token: ', token);
 
           res.json({token: token});
 
@@ -64,7 +67,7 @@ var signup = function(req, res){
   });
 }
 
-var verifyToken = function(req, res, next){
+var jwtAuthentication = function(req, res, next){
   // middleware function to check for jwt token
 
   var token = req.headers['x-access-token'];
@@ -74,6 +77,7 @@ var verifyToken = function(req, res, next){
       .then(function(user){
         if(user){
           req.body.username = user.username;
+          next();
           //res.send(200);
         } else { // user doesn't exist
           res.send(401);
@@ -81,10 +85,10 @@ var verifyToken = function(req, res, next){
       })
       .catch(function(err){
         console.log('error verifying token: ', err);
-        next();
+        res.send(401);
       });
   } else { // no token
-    next();
+    res.send(401);
   }
 }
 
@@ -167,6 +171,6 @@ module.exports = {
   // accounts: accounts
   signin: signin,
   signup: signup,
-  verifyToken: verifyToken,
+  jwtAuthentication: jwtAuthentication,
   getAccounts: getAccounts
 }
