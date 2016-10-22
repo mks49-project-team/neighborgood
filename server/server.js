@@ -8,6 +8,7 @@ var db = require('../db/index.js')
 var app = express();
 
 app.set('port', process.env.PORT || 8008);
+// app.set('jwtTokenSecret', 'neighborgood_secret');
 
 //register middleware
 app.use(morgan('dev'));

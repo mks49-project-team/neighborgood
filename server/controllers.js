@@ -1,7 +1,7 @@
 var request = require('request');
 //var crime = require('../crimeData/crimeStats.js');
 var neighborhoodScore = require('./neighborhoodScore.js');
-var accountsController = require('./../db/accounts/accountsController.js')
+var accountsController = require('./../db/accounts/accountsController.js');
 
 
 var googleMapsClient = require('@google/maps').createClient({
@@ -95,10 +95,27 @@ var controller = {
 
 	},
 
-	postData : function(req, res) {
-		console.log('this is postData in controllers.js, this is req.body:', req.body);
-		accountsController.accounts(req.body);
+	signin : function(req, res) {
+		accountsController.signin(req, res);
+	},
+
+	signup : function(req, res) {
+		// res.send('signup');
+		accountsController.signup(req, res);
+	},
+
+	getAccounts: function(req, res) {
+		accountsController.getAccounts(req, res);
+	},
+
+	getSearches: function(req, res) {
+		res.send('inside getsearches');
 	}
+
+	// postData : function(req, res) {
+	// 	console.log('this is postData in controllers.js, this is req.body:', req.body);
+	// 	accountsController.accounts(req.body);
+	// }
 
 }
 

@@ -238,18 +238,18 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
-  var postData = function(userData) {
-    // JEFF IS LEARNING SOMETHING!!!
-    // data is for post, params is for get
-    // post req.body
-    // get req.query
-    console.log('wtf just went in?', userData);
-    return $http({
-      method: "POST",
-      url: "api/post",
-      data: userData
-    })
-  }
+  // var postData = function(userData) {
+  //   // JEFF IS LEARNING SOMETHING!!!
+  //   // data is for post, params is for get
+  //   // post req.body
+  //   // get req.query
+  //   console.log('wtf just went in?', userData);
+  //   return $http({
+  //     method: "POST",
+  //     url: "api/post",
+  //     data: userData
+  //   })
+  // }
 
   return {
     startupGeoLocation : startupGeoLocation,
@@ -265,14 +265,14 @@ factoryModule.factory('mainFactory', function($http){
     insertPriorities : insertPriorities,
     getScore : getScore,
     setUserNeighborhoodResult : setUserNeighborhoodResult,
-    postData : postData,
+    // postData : postData,
     user : user // for console.logs
   }
 });
 
 factoryModule.factory('userFactory', function($http, $window){
-  var signin = function(user, callback) {
-    $http({
+  var signin = function(user) {
+    return $http({
       method: 'POST',
       url: '/api/users/signin',
       data: user
@@ -280,15 +280,12 @@ factoryModule.factory('userFactory', function($http, $window){
     .then(function(response){
       if(response.data.token){
         // successful signin
-        $window.localStorage.user = {
-          username: username,
-          token: response.data.token
-        };
+        $window.localStorage.token = response.data.token;
         // set authorization header
-        $http.defaults.headers.common['Auth-Token'] = response.data.token;
-        callback(true);
+        $http.defaults.headers.common['x-access-token'] = response.data.token;
+        return true;
       } else {
-        callback(false);
+        return false;
       }
     });
   }
@@ -300,14 +297,19 @@ factoryModule.factory('userFactory', function($http, $window){
       data: user
     })
     .then(function(response){
-      return response.data.token;
+      if(response.data !== "exists" && response.data.token) {
+        console.log(response.data.token);
+        $window.localStorage.token = response.data.token;
+        $http.defaults.headers.common['x-access-token'] = response.data.token;
+      }
+      return response;
     });
   }
 
 
   var signout = function(){
     delete $window.localStorage.user;
-    $http.defaults.headers.common['Auth-Token'] = '';
+    $http.defaults.headers.common['x-access-token'] = '';
   }
 
   return {

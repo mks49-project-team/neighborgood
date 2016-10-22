@@ -4,13 +4,13 @@
     <form ng-submit="vm.signin()">
       <div>
         <label>Username</label>
-        <input type="text" ng-model="vm.username" required></input>
+        <input type="text" ng-model="vm.user.username" required></input>
         <span ng-show="form.username.$dirty && form.username.$error.required">Username is required</span>
       </div>
 
       <div>
         <label>Password</label>
-        <input type="password" ng-model="vm.password" required></input>
+        <input type="password" ng-model="vm.user.password" required></input>
         <span ng-show="form.password.$dirty && form.username.$error.required">Password is required</span>
       </div>
 

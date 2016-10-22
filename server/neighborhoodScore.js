@@ -1,7 +1,6 @@
 var crime = require('../crimeData/crimeStats.js');
 var _ = require('lodash');
 
-console.log(crime)
 var getCommuteScore = function(time){
   // time in minutes
   // scoring method:
