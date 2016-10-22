@@ -31,7 +31,7 @@ var controller = {
 
 		googleMapsClient.placesNearby({
 			location : latlng,
-			radius : 600,
+			radius : 1000,
 			rankBy : 'distance',
 			type : 'restaurant'
 		}, function(err, response) {
@@ -50,9 +50,9 @@ var controller = {
 
 		googleMapsClient.placesNearby({
 			location : latlng,
-			radius : 600,
+			radius : 1000,
 			rankBy : 'distance',
-			type : 'store'
+			type : 'grocery_or_supermarket'
 		}, function(err, response) {
 			if (err) {
 				console.log(err, 'error getStoreLocation controller.js')
