@@ -119,4 +119,5 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   //console.log(typeof vm.x);
   }
   vm.trial();
+
 });

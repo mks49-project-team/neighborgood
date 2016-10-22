@@ -1,0 +1,11 @@
+<div>
+<nav class="navbar navbar-default navbar">
+  <ul class="nav navbar-nav">
+    <li><a ui-sref="startup">New Search</a></li>
+    <li><a ui-sref="savedSearches" ng-show="vm.isUserLoggedIn">Saved Searches</a></li>
+    <li><a ui-sref="auth" ng-show="vm.isUserLoggedIn" ng-click="vm.signout()">Log Out</a></li> {{vm.signout}}
+    <li><a ui-sref="auth" ng-show="!vm.isUserLoggedIn">Signin/Signup<a></li>
+  </ul>
+  <div class="navbar-header">Neighborgood</div>
+</nav>
+</div>

@@ -8,6 +8,7 @@ var signin = function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
+
   Accounts.findOne({username: username})
     .then(function(account){
       if(!account){

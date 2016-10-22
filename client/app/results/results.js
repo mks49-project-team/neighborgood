@@ -100,16 +100,16 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
   						icon: iconPlace,
               title: item.name
   					})
-            var msg = '<div id="content">' + 
-                      '<h1>' + item.name + '</h1>' + 
+            var msg = '<div id="content">' +
+                      '<h1>' + item.name + '</h1>' +
                       '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>'+ ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
                       '</div> </div>'
            var infowindow = infowindowCreator(msg)
            google.maps.event.addListener(marker, 'click', function() {
-           
+
                 infowindow.open(vm.map, marker)
 
-                
+
         })
            console.log(infowindow, 'this is stores info window');
 
@@ -126,8 +126,8 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
   						icon: iconPlace,
               title: item.name
   					})
-            var msg = '<div id="content">' + 
-                      '<h1>' + item.name + '</h1>' + 
+            var msg = '<div id="content">' +
+                      '<h1>' + item.name + '</h1>' +
                       '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>' + ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
                       '</div> </div>'
             var infowindow = infowindowCreator(msg);
@@ -143,11 +143,12 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
       homeinfo.open(vm.map, home)
     })
 
-    
+
 
   	universalMarkerMaker('store')
   	universalMarkerMaker('restaurant')
   }
   vm.initMap();
   console.log('inside resultsController');
+
 });

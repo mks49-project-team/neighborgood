@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup', 'savedSearches']);
+var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup', 'savedSearches', 'nav']);
 
 app.config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/');
@@ -6,15 +6,33 @@ app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state('startup', {
       url: '/',
-      templateUrl: 'app/startup/startup.html',
-      controller: 'startupController',
-      controllerAs: 'vm'
+      views: {
+        '': {
+          templateUrl: 'app/startup/startup.html',
+          controller: 'startupController',
+          controllerAs: 'vm'
+        },
+        'nav@startup': {
+          templateUrl: 'app/nav/nav.html',
+          controller: 'navController',
+          controllerAs: 'vm'
+        }
+      }
     })
     .state('options', {
       url: '/options',
-      templateUrl: 'app/options/options.html',
-      controller: 'optionsController',
-      controllerAs: 'vm'
+      views: {
+        '': {
+          templateUrl: 'app/options/options.html',
+          controller: 'optionsController',
+          controllerAs: 'vm'
+        },
+        'nav@options': {
+          templateUrl: 'app/nav/nav.html',
+          controller: 'navController',
+          controllerAs: 'vm'
+        }
+      }
     })
     .state('results', {
       url: '/results',
@@ -27,6 +45,11 @@ app.config(function($stateProvider, $urlRouterProvider){
         'scores@results': {
           templateUrl: 'app/results/scores.html',
           controller: 'scoresController',
+          controllerAs: 'vm'
+        },
+        'nav@results': {
+          templateUrl: 'app/nav/nav.html',
+          controller: 'navController',
           controllerAs: 'vm'
         }
       }
@@ -46,14 +69,45 @@ app.config(function($stateProvider, $urlRouterProvider){
           templateUrl: 'app/auth/signup.html',
           controller: 'signupController',
           controllerAs: 'vm'
+        },
+        'nav@auth': {
+          templateUrl: 'app/nav/nav.html',
+          controller: 'navController',
+          controllerAs: 'vm'
         }
      }
    })
    .state('savedSearches', {
      url: '/savedSearches',
-     templateUrl: 'app/savedSearches/savedSearches.html',
-     controller: 'savedSearchesController',
-     controllerAs: 'vm'
+     views: {
+       '': {
+         templateUrl: 'app/savedSearches/savedSearches.html',
+         controller: 'savedSearchesController',
+         controllerAs: 'vm'
+       },
+       'nav@savedSearches': {
+         templateUrl: 'app/nav/nav.html',
+         controller: 'navController',
+         controllerAs: 'vm'
+       }
+     }
    });
 
 });
+
+// var nav = angular.module('nav', ['app.factory.js'])
+// app.controller('navController', function($window, $location, userFactory){
+//   var vm = this;
+//   vm.isUserLoggedIn = false;
+//
+//   var init = function(){
+//     if($window.localStorage.user && $window.localStorage.token){
+//       vm.isUserLoggedIn = true;
+//     }
+//   }
+//   init();
+//   vm.signout = function(){
+//     userFactory.signout();
+//     $location.path('/signin');
+//   }
+// });
