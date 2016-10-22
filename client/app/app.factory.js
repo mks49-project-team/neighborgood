@@ -264,7 +264,8 @@ factoryModule.factory('mainFactory', function($http){
     setStoreData : setStoreData,
     insertPriorities : insertPriorities,
     getScore : getScore,
-    setUserNeighborhoodResult : setUserNeighborhoodResult
+    setUserNeighborhoodResult : setUserNeighborhoodResult,
+    user : user
   }
 });
 
@@ -313,6 +314,7 @@ factoryModule.factory('userFactory', function($http, $window){
   }
 
   var saveUserSearch = function(search) {
+    console.log(search, 'this is serach is appfactory saveUserSearch')
     return $http({
       method: 'POST',
       url: '/api/users/' + $window.localStorage.user + '/searches',
@@ -321,7 +323,7 @@ factoryModule.factory('userFactory', function($http, $window){
       }
     })
     .then(function(response){
-      return JSON.parse(response.data);
+      return response.data;
     });
   }
 

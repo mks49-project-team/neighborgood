@@ -1,11 +1,19 @@
 var results = angular.module('results', ['app.factory']);
 
-results.controller('resultsController', function(mainFactory){
+results.controller('resultsController', function(mainFactory, userFactory, $window, $location){
   var vm = this;
 
   vm.initMap = function() {
   	console.log('hi!')
   	vm.getMapData();
+  }
+
+  vm.saveSearch = function() {
+    if ($window.localStorage.getItem('token') !== null) {
+    userFactory.saveUserSearch(mainFactory.user.result)
+    } else if ($window.localStorage.getItem('token') === null) {
+      $location.path('signin')
+    }
   }
 
   vm.getMapData = function() {
