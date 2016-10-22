@@ -98,11 +98,11 @@ scores.controller('scoresController', function(mainFactory){
   }
 
   var init = function(){
-    // vm.scores = mainFactory.getUserData().result.neighborhoodResult;
-    // vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
-    vm.scores = {safety: 40, walk: 3, total: 76};
+    vm.scores = mainFactory.getUserData().result.neighborhoodResult;
+    vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+    // vm.scores = {safety: 40, walk: 3, total: 76};
     vm.scoreDisplay = vm.scores.total + '/100';
-    vm.neighborhood = 'la';
+    // vm.neighborhood = 'la';
 
   }
   init();

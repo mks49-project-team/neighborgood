@@ -109,12 +109,14 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
 
 
 
-
+  vm.trial = function() {
 
   userFactory.getUserSearches()
     .then(function(results){
       vm.x = results;
+      console.log(vm.x)
     })
   //console.log(typeof vm.x);
-
+  }
+  vm.trial();
 });

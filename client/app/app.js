@@ -5,7 +5,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
     .state('startup', {
-      url: '/startup',
+      url: '/',
       templateUrl: 'app/startup/startup.html',
       controller: 'startupController',
       controllerAs: 'vm'
@@ -32,7 +32,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       }
     })
     .state('auth', {
-      url: '/',
+      url: '/signin',
       views: {
         '': {
           templateUrl: 'app/auth/auth.html'
