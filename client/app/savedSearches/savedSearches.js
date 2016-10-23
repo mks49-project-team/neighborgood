@@ -135,7 +135,11 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
       }
   };
 
-
+  vm.transferToResults = function(info) {
+    console.log('we actually ran this motha f')
+    mainFactory.user.result = info;
+    $location.path('results')
+  }
   //user clicks on item in unorderedlist and runs:
   vm.renderMarker = function(obj, info) {
     //console.log(obj, 'this is dat obj Dir meow ******')
@@ -151,7 +155,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
        })
     var msgSaveMaker = function () { 
       if (info) {
-           msgSave = '<div id="content">' +
+           msgSave = '<div id="content" ng-click="vm.transferToResults(info)">' +
            //'<h1> score : 88! </h1>' +
            '<h5> score </h5>' +
            '<h5>' + info.neighborhoodResult.total + '</h5>' +
