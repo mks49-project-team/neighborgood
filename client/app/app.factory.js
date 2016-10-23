@@ -188,7 +188,7 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var insertDirectionsData = function(data) {
-
+    console.log('sunday morning data:', data)
     user.result.commute = {
       distance : {
         text : data.distance.text,
