@@ -10,28 +10,24 @@ var signin = function(req, res){
 
 
   Accounts.findOne({username: username})
-    .then(function(account){
-      if(!account){
-        // user not found
-        res.send("incorrect");
-      } else {
-        // check password
+    .exec(function(err, account){
+      if(account !== null){
+        console.log('password match?: ', account.checkPassword(password))
         if(account.checkPassword(password)){
+          console.log('line20 : ', account);
           var payload = {iss: username};
-          var token = jwt.encode(payload,'neighborgood_secret'); /*app.get('jwtTokenSecret'*));*/
+          var token = jwt.encode(payload,'neighborgood_secret');
           res.json({token: token});
         } else{
           // incorrect password
           res.send("incorrect");
-
         }
-
+      } else {
+        // user not found
+        res.send("incorrect");
       }
-    })
-    .catch(function(err){
-      console.log('error signing in: ', err);
-      res.send(500);
     });
+
 }
 
 var signup = function(req, res){

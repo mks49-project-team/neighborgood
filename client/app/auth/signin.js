@@ -13,7 +13,7 @@ signin.controller('signinController', function(userFactory, $location){
         } else {
           vm.showErrorMsg = true;
         }
-      })
+      });
   }
 
 

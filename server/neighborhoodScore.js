@@ -53,7 +53,7 @@ var calcTotalScore = function(weights, scores){
       total += weight * scores[category];
     }
   });
-  return total;
+  return Math.round(total);
 }
 
 var getScores = function(req, res){
