@@ -68,9 +68,15 @@ var controller = {
     var originLng = req.query.originLng
     var destinationLat = req.query.destinationLat
     var destinationLng = req.query.destinationLng
-    var getMonday = function() {
-    	return 1477494000;
-    }
+		var getMonday = function(date) {
+	    var day = date.getDay();
+	    if (day !== 1) {
+	    	date.setHours((24*(8-day)) + 8);
+	    } else {
+	    	date.setHours((24*7)+8);
+	    }
+	    return Math.round(date.getTime()/1000);
+		};
 		var options = {
 			method: 'GET',
 			uri: 'https://maps.googleapis.com/maps/api/directions/json',
@@ -78,7 +84,7 @@ var controller = {
 				origin: originLat + ',' + originLng,
 				destination: destinationLat + ',' + destinationLng,
 				key: process.env.GOOGLE_API_KEY,
-				departure_time: getMonday()
+				departure_time: getMonday(new Date())
 			}
 		}
 
