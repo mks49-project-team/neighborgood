@@ -333,9 +333,12 @@ factoryModule.factory('userFactory', function($http, $window){
       url: '/api/users/' + $window.localStorage.user + '/searches',
     })
     .then(function(response){
-      console.log('asdfjakld;: ', Array.isArray(response.data));
       return response.data;
     });
+  }
+
+  var isUserLoggedIn = function(){
+    return ($window.localStorage.user !== undefined) && ($window.localStorage.token !== undefined);
   }
 
   return {
@@ -343,6 +346,7 @@ factoryModule.factory('userFactory', function($http, $window){
     signup: signup,
     signout: signout,
     saveUserSearch: saveUserSearch,
-    getUserSearches: getUserSearches
+    getUserSearches: getUserSearches,
+    isUserLoggedIn: isUserLoggedIn
   }
 });

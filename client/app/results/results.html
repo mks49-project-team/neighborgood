@@ -1,11 +1,11 @@
 <div>
     <div ui-view="nav"></div>
 
-     <h3 ng-click="vm.initMap()">NeighborgoodMaps</h3>
+     <!-- <h3 ng-click="vm.initMap()">NeighborgoodMaps</h3> -->
     <div id="map" style="height:400px;width:100%;"></div>
 
     <div ui-view='scores'></div>
-
-    <button ng-click="vm.saveSearch()"><li>Save Search</li></button>
-
+    <br>
+    <button class="btn btn-default" ng-show="vm.isUserLoggedIn" ng-click="vm.saveSearch()">Save Search</button>
+    <span ng-show="!vm.isUserLoggedIn">Sign in or sign up to save this search</span>
 </div>

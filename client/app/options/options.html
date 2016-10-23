@@ -1,25 +1,25 @@
 <div>
   <div ui-view="nav"></div>
 
-  <div class="options">
+  <div class="checkbox options">
     <h3>When choosing a place to live, what is important to you?</h3>
 
     <form class="options" ng-submit="vm.optionsGeoLocation()" ng-init="vm.autocomplete()">
 
       <label>
-        <input type="checkbox" name="options"  ng-model="vm.priorities.safety" ng-true-value="1" ng-false-value="0"> Safety
+        <input type="checkbox" name="options"  ng-model="vm.priorities.safety" ng-true-value="1" ng-false-value="0" novalidate> Safety
       </label>
       <br>
       <label>
-        <input type="checkbox" name="options" ng-model="vm.priorities.commute" ng-true-value="1" ng-false-value="0"> Commute Time
+        <input type="checkbox" name="options" ng-model="vm.priorities.commute" ng-true-value="1" ng-false-value="0" novalidate> Commute Time
       </label>
       <br>
       <label>
-        <input type="checkbox" name="options" ng-model="vm.priorities.walkability" ng-true-value="1" ng-false-value="0"> Walkability
+        <input type="checkbox" name="options" ng-model="vm.priorities.walkability" ng-true-value="1" ng-false-value="0" novalidate> Walkability
       </label>
       <br>
       <div ng-show="vm.priorities.commute===1">
-        <input type="text" placeholder="Enter your work/school/commute address" ng-model="vm.secondAddress" id="autocomplete" size="50" autocomplete="on" required>
+        <input type="text" placeholder="Enter your work/school/commute drive address" ng-model="vm.secondAddress" id="autocomplete" size="50" autocomplete="on" ngRequired="vm.priorities.commute">
       </div>
       <br>
       <button class="btn btn-dafault options" type="submit">Next</button>

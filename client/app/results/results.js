@@ -4,14 +4,13 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
   var vm = this;
 
   vm.initMap = function() {
-  	console.log('hi!')
   	vm.getMapData();
   }
 
   vm.saveSearch = function() {
     if ($window.localStorage.getItem('token') !== null) {
-    userFactory.saveUserSearch(mainFactory.user.result)
-    mainFactory.user.result = {};
+      userFactory.saveUserSearch(mainFactory.user.result);
+      mainFactory.user.result = {};
     } else if ($window.localStorage.getItem('token') === null) {
       $location.path('signin')
     }
@@ -39,10 +38,10 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
       title: 'YOUR NEW HOUSE!'
     })
 
-      home.setAnimation(google.maps.Animation.BOUNCE);
+    home.setAnimation(google.maps.Animation.BOUNCE);
     var homeinfo = new google.maps.InfoWindow({
-          content: '<h1> ' + resPath.newAddress.full + '</hi>'
-        });
+      content: '<h1> ' + resPath.newAddress.full + '</hi>'
+    });
       // function toggleBounce() {
       //   if (home.getAnimation() !== null) {
       //     home.setAnimation(null);
@@ -150,6 +149,8 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
   	universalMarkerMaker('restaurant')
   }
   vm.initMap();
-  console.log('inside resultsController');
+
+  vm.isUserLoggedIn = userFactory.isUserLoggedIn();
+  console.log(vm.isUserLoggedIn);
 
 });

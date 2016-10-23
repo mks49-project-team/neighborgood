@@ -12,7 +12,7 @@ var getCommuteScore = function(time){
 
 var getWalkabilityScore = function(restaurants, stores){
   // scoring method:
-  // range from 0 (worst) to 1 (best)
+  // range from 0 (worst) to 100 (best)
   // stores/restaurants = 0 --> 0
   // stores/restaurants >= 20 --> 100
   var total = restaurants.length + stores.length;
@@ -76,10 +76,9 @@ var getScores = function(req, res){
 
   var scores = {};
 
-  // priorities = [commute, crime, stores]
+
   if (priorities.commute) {
-    var time = 80;
-    //var time = userData.commute.duration.value / 60; // convert to minutes
+    var time = userData.commute.duration.value / 60; // convert to minutes
     scores.commute = getCommuteScore(time);
   }
   if (priorities.walkability) {
