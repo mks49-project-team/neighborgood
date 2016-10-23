@@ -1,13 +1,14 @@
-<div>
+<div id='scores'>
 
   <div id='score-box'>
 
     <div id='total-score'>
       <span id='total-score-text'>Score</span>
+      <br>
       <span id='total-score-value'>{{vm.scoreDisplay}}</span>
+      <a ng-click="vm.showDetails()" href="">details</a>
     </div>
 
-    <a ng-click="vm.showDetails()" href="">details</a>
     <div id='scores-chart'></div>
     <div id='scoring-info' ng-show='vm.showDetailsText'>
       <p>

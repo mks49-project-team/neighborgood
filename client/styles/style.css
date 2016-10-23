@@ -85,3 +85,30 @@ div.signup.ng-scope {
   margin: 10px 50px;
   padding: 40px;
 }
+div#scores {
+  width: 80%;
+  margin: auto;
+  background: rgba(242,239,232,0.7);
+  padding: 40px;
+  position: relative;
+}
+#map {
+  margin: auto;
+}
+#scores p {
+  font-size: 11px;
+  text-align: justify;
+}
+div#total-score {
+  width: 200px;
+  height: 200px;
+  font-size: 24px;
+  border-radius: 4px;
+  border: solid black 2px;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+}
