@@ -8,11 +8,11 @@
   <h1>17310 Vickie Ave, Cerritos, CA</h1>
 </div>
 
-<form ng-submit="vm.optionsGeoLocation()">
+<form ng-submit="vm.optionsGeoLocation()" ng-init="vm.autocomplete()">
 
   <div ng-show="vm.priorities.commute===1">
     Insert your work/school/commute address!
-    <input type="text" placeholder="Input your work/school/commute drive address" ng-model="vm.secondAddress">
+    <input type="text" placeholder="Input your work/school/commute drive address" ng-model="vm.secondAddress" id="autocomplete" size="50" autocomplete="on">
   </div>
 
   <h2>Select What Criteria Matter to You</h2>

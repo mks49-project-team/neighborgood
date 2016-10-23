@@ -1,6 +1,6 @@
 <div>
-	<form ng-submit="vm.newAddressPost()">
-	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA">
+	<form ng-submit="vm.newAddressPost()" ng-init="vm.autocomplete()">
+	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA" id="autocomplete" autocomplete="on" size="50">
 	<h1>604 Arizona Ave, Santa Monica, CA</h1>
 
 	<button type="submit">Submit</button>

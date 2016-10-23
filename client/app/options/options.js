@@ -11,6 +11,18 @@ options.controller('optionsController', function(mainFactory, $location){
     walkability: 0
   };
 
+  vm.autocomplete;
+
+  vm.autocomplete = function() {
+    vm.defaultBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-34.0522, 118.2437));
+    vm.input = document.getElementById('autocomplete');
+    vm.options = {bounds: vm.defaultBounds};
+
+    vm.autocomplete = new google.maps.places.Autocomplete(
+      vm.input, vm.options);
+  }
+
   vm.optionsGeoLocation = function() {
     if (vm.secondAddress) {
     mainFactory.startupGeoLocation(vm.secondAddress)

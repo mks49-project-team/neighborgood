@@ -3,6 +3,16 @@ var startup = angular.module('startup', ['app.factory']);
 startup.controller('startupController', function(mainFactory, $location){
   var vm = this;
 
+  vm.autocomplete = function() {
+    vm.defaultBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-34.0522, 118.2437));
+    vm.input = document.getElementById('autocomplete');
+    vm.options = {bounds: vm.defaultBounds};
+
+    vm.autocomplete = new google.maps.places.Autocomplete(
+      vm.input, vm.options);
+  }
+
   //startup - on submit, runs function to ping google GEOLOC api
   // and store data in our user.results object in factory.
   vm.newAddressPost = function() {

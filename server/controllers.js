@@ -4,6 +4,7 @@ var neighborhoodScore = require('./neighborhoodScore.js');
 var accountsController = require('./../db/accounts/accountsController.js');
 
 
+
 var googleMapsClient = require('@google/maps').createClient({
 	key: process.env.GOOGLE_API_KEY
 });
@@ -68,6 +69,9 @@ var controller = {
     var originLng = req.query.originLng
     var destinationLat = req.query.destinationLat
     var destinationLng = req.query.destinationLng
+    var getMonday = function() {
+    	return 1477494000;
+    }
 		var options = {
 			method: 'GET',
 			uri: 'https://maps.googleapis.com/maps/api/directions/json',
@@ -75,7 +79,7 @@ var controller = {
 				origin: originLat + ',' + originLng,
 				destination: destinationLat + ',' + destinationLng,
 				key: process.env.GOOGLE_API_KEY,
-				departure_time: 1477494000
+				departure_time: getMonday()
 			}
 		}
 
