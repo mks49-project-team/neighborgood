@@ -2,16 +2,14 @@
 
 	<div ui-view="nav"></div>
 
-	<form ng-submit="vm.newAddressPost()" ng-init="vm.autocomplete()">
-	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA" id="autocomplete" autocomplete="on" size="50">
 	<h1>604 Arizona Ave, Santa Monica, CA</h1>
 
 
 	<div class="startup">
 		<div class="startup-form-group">
-			<form class="startup" ng-submit="vm.newAddressPost()">
+			<form class="startup" ng-submit="vm.newAddressPost()" ng-init="vm.autocomplete()">
 				<h3>Interested in a new location?</h3>
-				<input type="text" class="form-control" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA" required>
+				<input type="text" class="form-control" ng-model="vm.newAddress" id="autocomplete" autocomplete="on" placeholder="604 Arizona, Santa Monica CA" required>
 				<br>
 				<button type="submit" class="btn btn-dafault">Submit</button>
 			</form>
