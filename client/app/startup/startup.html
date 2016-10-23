@@ -1,10 +1,16 @@
 <div>
 	<div ui-view="nav"></div>
 
-	<form ng-submit="vm.newAddressPost()">
-	<input type="text" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA">
+	<div class="input-group">
+		<div class="form-group">
+			<form ng-submit="vm.newAddressPost()">
+				<h3>Interested in a new location?</h3>
+				<input type="text" class="form-control" ng-model="vm.newAddress" placeholder="604 Arizona, Santa Monica CA" required>
+				<br>
+				<button type="submit" class="btn btn-dafault">Submit</button>
+			</form>
+		</div>
+	</div>
 
-	<button type="submit">Submit</button>
-	</form>
-	<h1>604 Arizona Ave, Santa Monica, CA</h1>
+	<!-- <h1>604 Arizona Ave, Santa Monica, CA</h1> -->
 </div>
