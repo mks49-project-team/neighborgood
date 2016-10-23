@@ -9,7 +9,7 @@ signin.controller('signinController', function(userFactory, $location){
     userFactory.signin(vm.user)
       .then(function(success){
         if(success) {
-          $location.path('/savedSearches');
+          $location.path('savedSearches');
         } else {
           vm.showErrorMsg = true;
         }

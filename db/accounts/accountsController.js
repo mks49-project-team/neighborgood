@@ -8,6 +8,7 @@ var signin = function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
+
   Accounts.findOne({username: username})
     .then(function(account){
       if(!account){
@@ -71,6 +72,7 @@ var jwtAuthentication = function(req, res, next){
   // middleware function to check for jwt token
 
   var token = req.headers['x-access-token'];
+  console.log('req.headers: ', req.headers);
   if(token){
     var decoded = jwt.decode(token, 'neighborgood_secret');
     Accounts.findOne({username: decoded.iss})
@@ -80,7 +82,7 @@ var jwtAuthentication = function(req, res, next){
           next();
           //res.send(200);
         } else { // user doesn't exist
-          res.send(401);
+          res.send("Please log in or sign up to view saved searches");
         }
       })
       .catch(function(err){
@@ -88,7 +90,7 @@ var jwtAuthentication = function(req, res, next){
         res.send(err);
       });
   } else { // no token
-    res.send(401);
+    res.send("Please log in or sign up to view saved searches");
   }
 }
 

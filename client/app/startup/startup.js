@@ -1,6 +1,6 @@
 var startup = angular.module('startup', ['app.factory']);
 
-startup.controller('startupController', function(mainFactory, $location){
+startup.controller('startupController', function(mainFactory, $location, userFactory){
   var vm = this;
 
   //startup - on submit, runs function to ping google GEOLOC api
@@ -36,5 +36,6 @@ startup.controller('startupController', function(mainFactory, $location){
   		return mainFactory.setStoreData(stores.data.results);
   	})
   };
+
 
 });

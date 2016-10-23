@@ -11,7 +11,7 @@ signup.controller('signupController', function(userFactory, $location){
         if(response.data === "exists"){
           vm.showErrorMsg = true;
         } else {
-          $location.path('/savedSearches');
+          $location.path('savedSearches');
         }
       });
   }
