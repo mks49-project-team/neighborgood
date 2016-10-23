@@ -38,7 +38,6 @@ var controller = {
 			if (err) {
 				console.log(err, 'error getRestarantLocation controller.js')
 			}
-			//console.log(response.json, 'this is what i send from placesNarby');
 			res.send(response.json);
 		})
 	},
@@ -115,11 +114,6 @@ var controller = {
 	postUserSearch: function(req, res) {
 		accountsController.postUserSearch(req, res);
 	}
-
-	// postData : function(req, res) {
-	// 	console.log('this is postData in controllers.js, this is req.body:', req.body);
-	// 	accountsController.accounts(req.body);
-	// }
 
 }
 
