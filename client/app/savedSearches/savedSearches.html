@@ -1,4 +1,17 @@
 <div>
+	<ul>
+		<li ng-repeat="user in vm.maps" ng-click="vm.renderSavedMaps($index)">
+			{{user}}
+		</li>
+	</ul>
+     <h3 ng-click="vm.initMaps()">NeighborgoodMaps</h3>
+    <div id="mapSave" style="height:400px;width:100%;"></div>
+
+    <button ng-click="vm.initMaps()"><li>Save Search</li></button>
+
+</div>
+<div>
   saved
   {{vm.x}}
 </div>
+

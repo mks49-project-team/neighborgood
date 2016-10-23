@@ -11,6 +11,7 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
   vm.saveSearch = function() {
     if ($window.localStorage.getItem('token') !== null) {
     userFactory.saveUserSearch(mainFactory.user.result)
+    mainFactory.user.result = {};
     } else if ($window.localStorage.getItem('token') === null) {
       $location.path('signin')
     }
