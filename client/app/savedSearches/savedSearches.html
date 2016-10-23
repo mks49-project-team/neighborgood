@@ -2,15 +2,15 @@
 
   <div ui-view="nav"></div>
 
-	<ul>
-		<li ng-repeat="user in vm.maps" ng-click="vm.renderSavedMaps($index)">
-			{{user}}
+	<ul ng-if="vm.populateList"><li ng-click="vm.renderSavedMaps(0)">
+			no commute
+		</li>
+		<li  ng-repeat="user in vm.mapsName" ng-click="vm.renderSavedMaps($index)" ng-if="$index > 0">
+			commute to : {{user.destinationAddress.full}}
 		</li>
 	</ul>
      <h3 ng-click="vm.initMaps()">NeighborgoodMaps</h3>
     <div id="mapSave" style="height:400px;width:100%;"></div>
-
-    <button ng-click="vm.initMaps()"><li>Save Search</li></button>
 
 </div>
 
