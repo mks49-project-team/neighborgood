@@ -207,16 +207,6 @@ factoryModule.factory('mainFactory', function($http){
 
   var insertPriorities = function(data) {
     user.result.priorities = data;
-    // console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
-    // console.log('jefffyooo: whats in the user object?:', user)
-    // getScore()
-    //   .then(function(response){
-    //     user.result.neighborhoodResult = response.data;
-    //     console.log(response);
-    //   })
-    //   .catch(function(err){
-    //     console.log('error getting score: ', err);
-    //   });
   }
 
 
@@ -232,22 +222,7 @@ factoryModule.factory('mainFactory', function($http){
 
   var setUserNeighborhoodResult = function(neighborhoodResult){
     user.result.neighborhoodResult = neighborhoodResult;
-    console.log(neighborhoodResult);
   }
-
-  // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
-  // var postData = function(userData) {
-  //   // JEFF IS LEARNING SOMETHING!!!
-  //   // data is for post, params is for get
-  //   // post req.body
-  //   // get req.query
-  //   console.log('wtf just went in?', userData);
-  //   return $http({
-  //     method: "POST",
-  //     url: "api/post",
-  //     data: userData
-  //   })
-  // }
 
   return {
     startupGeoLocation : startupGeoLocation,
@@ -312,7 +287,6 @@ factoryModule.factory('userFactory', function($http, $window){
   }
 
   var saveUserSearch = function(search) {
-    console.log(search, 'this is serach is appfactory saveUserSearch')
     return $http({
       method: 'POST',
       url: '/api/users/' + $window.localStorage.user + '/searches',
@@ -321,7 +295,7 @@ factoryModule.factory('userFactory', function($http, $window){
       }
     })
     .then(function(response){
-      return response.data;
+      return response;
     });
   }
 

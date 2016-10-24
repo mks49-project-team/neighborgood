@@ -2,18 +2,26 @@ var results = angular.module('results', ['app.factory']);
 
 results.controller('resultsController', function(mainFactory, userFactory, $window, $location){
   var vm = this;
-
+  vm.saved = false;
   vm.initMap = function() {
   	vm.getMapData();
   }
 
   vm.saveSearch = function() {
     if ($window.localStorage.getItem('token') !== null) {
-      userFactory.saveUserSearch(mainFactory.user.result);
-      mainFactory.user.result = {};
-    } else if ($window.localStorage.getItem('token') === null) {
-      $location.path('signin')
+      userFactory.saveUserSearch(mainFactory.user.result)
+        .then(function(response){
+          console.log('response: ', response);
+          if(response.status === 200){
+            vm.saved = true;
+            mainFactory.user.result = {};
+            $location.path('savedSearches');
+          }
+        });
     }
+    // } else if ($window.localStorage.getItem('token') === null) {
+    //   $location.path('signin')
+    // }
   }
 
   vm.getMapData = function() {

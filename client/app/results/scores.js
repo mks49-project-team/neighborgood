@@ -9,13 +9,12 @@ scores.controller('scoresController', function(mainFactory){
 
   var setColors = function(chartData){
     return chartData.reduce(function(colors, category){
-      console.log(colors);
       if(category[1] < 40){
         colors[category[0]] = '#ff0000';
       } else if (category[1] >= 40 && category[1] < 75) {
-        colors[category[0]] = 'ff6600';
+        colors[category[0]] = '#ff6600';
       } else {
-        colors[category[0]] = '009900';
+        colors[category[0]] = '#009900';
       }
       return colors;
     }, {});
@@ -24,10 +23,30 @@ scores.controller('scoresController', function(mainFactory){
   vm.showDetails = function(){
     vm.showDetailsText = true;
     // generate data for bar chart
+  }
+
+  vm.low = false;
+  vm.mid = false;
+  vm.high = false;
+
+  var init = function(){
+    vm.scores = mainFactory.getUserData().result.neighborhoodResult;
+    vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
+    vm.scoreDisplay = vm.scores.total + '/100';
+    // color code score box
+    if (vm.scores.total < 40){
+      vm.low = true;
+    } else if (vm.scores.total >= 40 && vm.scores.total < 75){
+      vm.mid = true;
+    } else {
+      vm.high = true;
+    }
+
+    // render scores in chart
     var chartData = [];
 
     for(var key in vm.scores){
-        chartData.push([key, vm.scores[key]]);
+      chartData.push([key, vm.scores[key]]);
     }
     // sort categories so they always appear in same order
     chartData.sort(function(a,b){
@@ -51,42 +70,47 @@ scores.controller('scoresController', function(mainFactory){
     var chartColors = setColors(chartData);
 
     vm.chart = c3.generate({
-        bindto: '#scores-chart',
-        size: {
-          width: 200,
-          height: 200
-        },
-        data: {
-          columns : chartBlankData,//chartData,
-          type: 'bar',
-          colors: chartColors,
-        },
-        axis: {
-          x: {
-            type: 'category',
-            tick:{
-              count: 0
-            }
-          },
-          y: {
-            tick: {
-              count: 5
-            },
-            min: 0,
-            max: 100,
-            padding: 0,
-            label: {
-              text: 'Score',
-              position: 'outer-middle'
-            }
+      bindto: '#scores-chart',
+      size: {
+        width: 200,
+        height: 200
+      },
+      data: {
+        columns : chartBlankData,//chartData,
+        type: 'bar',
+        colors: chartColors,
+      },
+      bar: {
+        width: {
+          ratio: 0.5
+        }
+      },
+      axis: {
+        x: {
+          type: 'category',
+          tick:{
+            count: 0
           }
         },
-        tooltip: {
-          grouped: false,
-          format: {
-            title: function(x) {return vm.neighborhood;}
+        y: {
+          tick: {
+            count: 5
+          },
+          min: 0,
+          max: 100,
+          padding: 0,
+          label: {
+            text: 'Score',
+            position: 'outer-middle'
           }
         }
+      },
+      tooltip: {
+        grouped: false,
+        format: {
+          title: function(x) {return vm.neighborhood;}
+        }
+      }
     });
 
     setTimeout(function(){
@@ -95,16 +119,6 @@ scores.controller('scoresController', function(mainFactory){
       });
 
     }, 250);
-  }
-
-  var init = function(){
-    vm.scores = mainFactory.getUserData().result.neighborhoodResult;
-    console.log('scores: ', vm.scores);
-    vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
-    // vm.scores = {safety: 40, walk: 3, total: 76};
-    vm.scoreDisplay = vm.scores.total + '/100';
-    // vm.neighborhood = 'la';
-
   }
   init();
 })

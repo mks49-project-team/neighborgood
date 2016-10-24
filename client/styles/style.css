@@ -87,7 +87,7 @@ div.signup.ng-scope {
 }
 div#scores {
   width: 80%;
-  height: 500px;
+  height: 550px;
   margin: auto;
   background: rgba(242,239,232,0.7);
   padding: 40px;
@@ -96,30 +96,26 @@ div#scores {
 #map {
   margin: auto;
 }
-#scores p {
+div#scoring-info {
   font-size: 11px;
   text-align: justify;
+  float: right;
+  margin: 5%;
 }
 div#total-score {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   font-size: 24px;
   border-radius: 4px;
-  border: solid black 2px;
+  border-width: 2px;
   padding: 10px;
   text-align: center;
   position: absolute;
   left: 25%;
-  top: 20%;
-  transform: translate(-50%, -50%);
+  top: 40px;
+  transform: translate(-50%, 0%);
 }
-div#total-score a {
-  font-size: 14px;
-  position: absolute;
-  bottom: 0%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 span#total-score-text {
   position: absolute;
   top: 25%;
@@ -131,11 +127,52 @@ span#total-score-value {
   bottom: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
-/*div#scores-chart {
+div#total-score.low-score {
+  border-color:  #ff0000;
+  border-style: solid;
+}
+
+div#total-score.mid-score {
+  border-color: #ff6600;
+  border-style: solid;
+}
+
+div#total-score.high-score {
+  border-color: #009900;
+  border-style: solid;
+}
+span#total-score-text.low-score, span#total-score-value.low-score {
+  color: #ff0000;
+}
+span#total-score-text.mid-score, span#total-score-value.mid-score {
+  color: #ff6600;
+}
+span#total-score-text.high-score, span#total-score-value.high-score {
+  color: #009900;
+}
+div.save-search {
+  width: 80%;
+  height: 100px;
+  background: rgba(242,239,232,0.7);
+  margin: auto;
+  text-align: center;
+}
+div#chart-container {
+  width: 100%;
+  height: 250px;
+  padding: 0px;
+  position: relative;
+}
+div#chart-container a {
   position: absolute;
-  right: 25%;
-  top: 20%;
-  transform: translate(-50%, -50%);
-}*/
+  right: 0%;
+  bottom: 0%;
+  transform: translate(-50%, 0%);
+}
+div#scores-chart.c3 {
+  position: absolute !important;
+  width: 50%;
+  right: 0px;
+  padding: 20px 20px;
+}
