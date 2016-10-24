@@ -1,8 +1,9 @@
 # NeighborGood
 
 > NeighborGood helps you find a neighborhood thats suitable for your needs in California. NeighborGood will provide you a score for a neighborhood based on user selected criteria.
+![alt tag](/../screenshots/neighborgood.gif)
 
-> https://neighborgood-demo.herokuapp.com
+https://neighborgood-demo.herokuapp.com
 
 ## Team
 
