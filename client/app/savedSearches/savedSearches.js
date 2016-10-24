@@ -93,7 +93,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
 
    vm.renderSavedMaps = function(selectionUser) {
    var item = selectionUser;
-   //console.log(selectionUser, 'this is selection user when clicked')
+   console.log(selectionUser, 'this is selection user when clicked')
       //clears out older markers selected
     vm.markerResults = [];
    // if there are addresses destination that were entered
@@ -122,10 +122,12 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
           //console.log(obj, "is it true")
           if (!!obj.destinationAddress) {
               if (vm.maps.indexOf(obj.destinationAddress.latlng) !== -1) {
+                if (obj.destinationAddress.latlng === vm.maps[item]) {
                 //console.log(obj, 'this obj had destination address right?')
                 vm.renderMarker(obj.destinationAddress);
                 vm.renderMarker(obj.newAddress, obj)
                 vm.markerResults.push(obj);
+              }
               }
             }
 
