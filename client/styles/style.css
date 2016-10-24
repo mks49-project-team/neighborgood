@@ -49,7 +49,6 @@ div.options {
   position: absolute;
   top: 50%;
   left: 50%;
-  /*background: rgba(242,239,232,0.75);*/
   transform: translate(-50%, -50%);
   text-align: center;
 }
@@ -94,7 +93,6 @@ div.signin {
   left: 0px;
   top: 0px;
   padding: 5%;
-  /*display: inline;*/
 }
 div.signup {
   width: 45%;
@@ -125,7 +123,7 @@ div#scoring-info {
 div#total-score {
   width: 200px;
   height: 200px;
-  font-size: 24px;
+  font-size: 40px;
   border-radius: 4px;
   border-width: 2px;
   padding: 10px;
@@ -208,8 +206,4 @@ div#scores-chart.c3 {
 #mapSave {
   margin: auto;
   margin-bottom: 50px;
-}
-
-#results-header {
-  text-align: center;
 }

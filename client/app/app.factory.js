@@ -47,7 +47,7 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   }
-    // only the function name and user.result.destinationAddress changed from the original code above
+
   var secondUserData = function(data) {
     if (data.address_components.length === 9) {
       user.result.destinationAddress = {
@@ -76,7 +76,6 @@ factoryModule.factory('mainFactory', function($http){
     }
   }
 
-
   //uses GOOGLE PLACES api to grab restaurant info by latlng
   var startupRestaurantLocation = function(latlng) {
     return $http({
@@ -91,9 +90,11 @@ factoryModule.factory('mainFactory', function($http){
     user.result.nearbyRestaurants = [];
     //console.log(data, 'this is data in set restaurants data ****')
     var photoChecker = function(x) {
-          if (x.photos === undefined) {
-            return 'N/A'
-          } else {return x.photos[0].html_attributions[0]}
+      if (x.photos === undefined) {
+        return 'N/A'
+      } else {
+        return x.photos[0].html_attributions[0]
+      }
     };
 
     if (data.length > 5) {
@@ -121,7 +122,6 @@ factoryModule.factory('mainFactory', function($http){
 
   //uses GOOGLE PLACES api to grab store info by latlng
   var startupStoreLocation = function(latlng) {
-    //console.log(latlng, 'this is latlng')
     return $http({
       method: 'GET',
       url: 'api/storeLocation',
@@ -132,14 +132,13 @@ factoryModule.factory('mainFactory', function($http){
   //sets the user object with user.result.nearbyStores
   var setStoreData = function(data) {
     user.result.nearbyStores = [];
-    //console.log(data, 'this is data in set restaurants data ****')
     var photoChecker = function(x) {
       var length;
-          if (x.photos === undefined) {
-            return 'N/A'
-          } else {
-            return x.photos[0].html_attributions[0]
-          }
+      if (x.photos === undefined) {
+        return 'N/A'
+      } else {
+        return x.photos[0].html_attributions[0]
+      }
     };
 
     if (data.length > 5) {
@@ -170,8 +169,6 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var getDirectionsApi = function(originLat, originLng, destinationLat, destinationLng) {
-    // all parameters are getting passed succesfully, jeff @ 2:34pm oct 18
-    console.log('inside getDirectionsApi in app.factory, were the parameters successfully passed in?:', originLat, originLng, destinationLat, destinationLng)
     return $http({
       method: "GET",
       url: "api/directions",
@@ -185,7 +182,6 @@ factoryModule.factory('mainFactory', function($http){
   }
 
   var insertDirectionsData = function(data) {
-    console.log('sunday morning data:', data)
     user.result.commute = {
       distance : {
         text : data.distance.text,
@@ -207,7 +203,6 @@ factoryModule.factory('mainFactory', function($http){
   var insertPriorities = function(data) {
     user.result.priorities = data;
   }
-
 
   var getScore = function(userData) {
     return $http({
@@ -254,7 +249,7 @@ factoryModule.factory('userFactory', function($http, $window){
         $window.localStorage.token = response.data.token;
         $window.localStorage.user = user.username;
         // set authorization header
-        $http.defaults.headers.common['x-access-token'] = response.data.token;
+        $http.defaults.headers.common['Authorization'] = response.data.token;
         return true;
       } else {
         return false;
@@ -272,7 +267,7 @@ factoryModule.factory('userFactory', function($http, $window){
       if(response.data !== "exists" && response.data.token) {
         $window.localStorage.token = response.data.token;
         $window.localStorage.user = user.username;
-        $http.defaults.headers.common['x-access-token'] = response.data.token;
+        $http.defaults.headers.common['Authorization'] = response.data.token;
       }
       return response;
     });
@@ -282,7 +277,7 @@ factoryModule.factory('userFactory', function($http, $window){
   var signout = function(){
     delete $window.localStorage.token;
     delete $window.localStorage.user;
-    $http.defaults.headers.common['x-access-token'] = '';
+    $http.defaults.headers.common['Authorization'] = '';
   }
 
   var saveUserSearch = function(search) {
@@ -311,6 +306,7 @@ factoryModule.factory('userFactory', function($http, $window){
   var isUserLoggedIn = function(){
     return ($window.localStorage.user !== undefined) && ($window.localStorage.token !== undefined);
   }
+
 
   return {
     signin: signin,

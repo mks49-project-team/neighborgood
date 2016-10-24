@@ -17,9 +17,11 @@ accountsSchema.pre('save', function(next){
   }
   next();
 });
+
 accountsSchema.methods.checkPassword = function(pw){
   return bcrypt.compareSync(pw, this.password);
 }
+
 var Accounts = mongoose.model('Accounts', accountsSchema);
 
 
