@@ -117,7 +117,6 @@ factoryModule.factory('mainFactory', function($http){
       });
     }
     user.result.numRestaurants = data.length;
-    //console.log(user.result.nearbyRestaurants, 'these are the nearby restaruants')
   }
 
   //uses GOOGLE PLACES api to grab store info by latlng
