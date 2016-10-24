@@ -85,7 +85,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
         vm.renderMap(vm.maps[0][0]);
         vm.savedResults.forEach(function(obj) {
           if (vm.maps[0].indexOf(obj.newAddress.latlng) !== -1) {
-            vm.renderMarker(obj.newAddress);
+            vm.renderMarker(obj.newAddress, obj);
             vm.markerResults.push(obj);
           }
         });

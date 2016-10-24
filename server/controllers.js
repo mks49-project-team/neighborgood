@@ -89,8 +89,7 @@ var controller = {
 			if (error) {
 				console.log('theres an error in getDirections in controllers:', error);
 			} else {
-				console.log(body);
-				res.send(body)
+				res.send(body);
 			}
 		});
 
