@@ -72,20 +72,18 @@ factoryModule.factory('mainFactory', function($http){
         lat: data.geometry.location.lat,
         lng: data.geometry.location.lng,
         latlng: data.geometry.location.lat + ',' + data.geometry.location.lng
+      }
     }
-  }
-    console.log(user, 'this is the user object in factory')
   }
 
 
   //uses GOOGLE PLACES api to grab restaurant info by latlng
   var startupRestaurantLocation = function(latlng) {
-    console.log(latlng, 'this is latlng')
     return $http({
       method: 'GET',
       url: 'api/restaurantLocation',
       params: {latlng: latlng}
-    })
+    });
   }
 
   //sets the user object with user.result.nearbyRestaurants
@@ -116,8 +114,9 @@ factoryModule.factory('mainFactory', function($http){
         lng : data[i].geometry.location.lng,
         latlng : data[i].geometry.location.lat + ',' + data[i].geometry.location.lng,
         placeId: data[i].place_id
-      })
+      });
     }
+    user.result.numRestaurants = data.length;
     //console.log(user.result.nearbyRestaurants, 'these are the nearby restaruants')
   }
 
@@ -128,7 +127,7 @@ factoryModule.factory('mainFactory', function($http){
       method: 'GET',
       url: 'api/storeLocation',
       params: {latlng: latlng}
-    })
+    });
   }
 
   //sets the user object with user.result.nearbyStores
@@ -164,8 +163,7 @@ factoryModule.factory('mainFactory', function($http){
         placeId: data[i].place_id
       })
     }
-    //console.log(user.result.nearbyStores, 'these are the nearby stores')
-    console.log(user, 'this is the user object')
+    user.result.numStores = data.length;
   }
 
   var getUserData = function() {
@@ -209,16 +207,6 @@ factoryModule.factory('mainFactory', function($http){
 
   var insertPriorities = function(data) {
     user.result.priorities = data;
-    // console.log('consolelogging the user.result.checkboxes to see if it got successfully passed in:', user.result.checkboxes);
-    // console.log('jefffyooo: whats in the user object?:', user)
-    // getScore()
-    //   .then(function(response){
-    //     user.result.neighborhoodResult = response.data;
-    //     console.log(response);
-    //   })
-    //   .catch(function(err){
-    //     console.log('error getting score: ', err);
-    //   });
   }
 
 
@@ -234,22 +222,7 @@ factoryModule.factory('mainFactory', function($http){
 
   var setUserNeighborhoodResult = function(neighborhoodResult){
     user.result.neighborhoodResult = neighborhoodResult;
-    console.log(neighborhoodResult);
   }
-
-  // for testing purposes, but maybe permanent. initially setting it up through options, but should be on the results page
-  // var postData = function(userData) {
-  //   // JEFF IS LEARNING SOMETHING!!!
-  //   // data is for post, params is for get
-  //   // post req.body
-  //   // get req.query
-  //   console.log('wtf just went in?', userData);
-  //   return $http({
-  //     method: "POST",
-  //     url: "api/post",
-  //     data: userData
-  //   })
-  // }
 
   return {
     startupGeoLocation : startupGeoLocation,
@@ -314,7 +287,6 @@ factoryModule.factory('userFactory', function($http, $window){
   }
 
   var saveUserSearch = function(search) {
-    console.log(search, 'this is serach is appfactory saveUserSearch')
     return $http({
       method: 'POST',
       url: '/api/users/' + $window.localStorage.user + '/searches',
@@ -323,7 +295,7 @@ factoryModule.factory('userFactory', function($http, $window){
       }
     })
     .then(function(response){
-      return response.data;
+      return response;
     });
   }
 
@@ -333,9 +305,12 @@ factoryModule.factory('userFactory', function($http, $window){
       url: '/api/users/' + $window.localStorage.user + '/searches',
     })
     .then(function(response){
-      console.log('asdfjakld;: ', Array.isArray(response.data));
       return response.data;
     });
+  }
+
+  var isUserLoggedIn = function(){
+    return ($window.localStorage.user !== undefined) && ($window.localStorage.token !== undefined);
   }
 
   return {
@@ -343,6 +318,7 @@ factoryModule.factory('userFactory', function($http, $window){
     signup: signup,
     signout: signout,
     saveUserSearch: saveUserSearch,
-    getUserSearches: getUserSearches
+    getUserSearches: getUserSearches,
+    isUserLoggedIn: isUserLoggedIn
   }
 });

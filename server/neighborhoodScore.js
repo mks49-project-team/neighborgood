@@ -7,15 +7,18 @@ var getCommuteScore = function(time){
   // range from 0 (worst) to 100 (best)
   // commute < 20 min --> 100
   // commute > 120 min --> 0
+  if(time > 120) {
+    return 0;
+  }
   return time < 20 ? 100 : Math.round(100 - (time - 20));
 }
 
 var getWalkabilityScore = function(restaurants, stores){
   // scoring method:
-  // range from 0 (worst) to 1 (best)
+  // range from 0 (worst) to 100 (best)
   // stores/restaurants = 0 --> 0
   // stores/restaurants >= 20 --> 100
-  var total = restaurants.length + stores.length;
+  var total = restaurants + stores;
   return total > 20 ? 100 : Math.round(100 - (20 - total) * 5);
 }
 
@@ -57,17 +60,8 @@ var calcTotalScore = function(weights, scores){
 }
 
 var getScores = function(req, res){
-  // for testing ******
-  // var priorities = {walkability: 2, crime: 3, commute: 1};
-  //
-  // var userData = {};
-  // userData.nearbyRestaurants = new Array(20);
-  // userData.nearbyStores = new Array(6);
-  // userData.commute.duration.value = 3600;
-
   var userData = JSON.parse(req.query.userData);
   var priorities = userData.priorities;
-  console.log('userData ', priorities);
   var geolocation = {
     latitude: userData.newAddress.lat,
     longitude: userData.newAddress.lng
@@ -76,14 +70,13 @@ var getScores = function(req, res){
 
   var scores = {};
 
-  // priorities = [commute, crime, stores]
   if (priorities.commute) {
-    var time = 80;
-    //var time = userData.commute.duration.value / 60; // convert to minutes
+    var time = userData.commute.duration.value / 60; // convert to minutes
+    console.log('80 time: ', time);
     scores.commute = getCommuteScore(time);
   }
   if (priorities.walkability) {
-    scores.walkability = getWalkabilityScore(userData.nearbyRestaurants, userData.nearbyStores);
+    scores.walkability = getWalkabilityScore(userData.numRestaurants, userData.numStores);
   }
   if (priorities.safety) {
     crime.getCrimeScore(req)

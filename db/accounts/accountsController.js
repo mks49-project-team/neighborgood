@@ -8,9 +8,10 @@ var signin = function(req, res){
   var username = req.body.username;
   var password = req.body.password;
 
-
+  console.log('req.body: ', req.body);
   Accounts.findOne({username: username})
     .exec(function(err, account){
+      console.log('account: ', account);
       if(account !== null){
         console.log('password match?: ', account.checkPassword(password))
         if(account.checkPassword(password)){

@@ -2,16 +2,17 @@
 
   <div ui-view="nav"></div>
 
-	<ul ng-if="vm.populateList"><li ng-click="vm.renderSavedMaps(0)">
-			no commute
-		</li>
-		<li  ng-repeat="user in vm.mapsName" ng-click="vm.renderSavedMaps($index)" ng-if="$index > 0">
-			commute to : {{user.destinationAddress.full}}
-		</li>
-	</ul>
-     <h3 ng-click="vm.initMaps()">NeighborgoodMaps</h3>
-    <div id="mapSave" style="height:400px;width:100%;"></div>
+  <div id="saved-searches-container">
+    <h3>Your Saved Results</h3>
+    <ul ng-if="vm.populateList" style="list-style: none;">
+      <li ng-click="vm.renderSavedMaps(0)"><a>Show searches without commuting address</a></li>
+      <li ng-repeat="user in vm.mapsName" ng-click="vm.renderSavedMaps($index)" ng-if="$index > 0">
+        <a>Searches with commuting address : {{user.destinationAddress.full}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="mapSave" style="height:400px;width:80%;"></div>
+     <!-- <h3 ng-click="vm.initMaps()">NeighborgoodMaps</h3> -->
 
 </div>
-
-

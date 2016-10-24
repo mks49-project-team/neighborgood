@@ -13,7 +13,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
       .then(function(results){
         vm.savedResults = results;
         //console.log(results, 'this is sindie grab user serarch');
-        //console.log(vm.savedResults) //array of objects! 
+        //console.log(vm.savedResults) //array of objects!
         vm.initMaps();
       })
     //console.log(typeof vm.x);
@@ -32,7 +32,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
       vm.renderSavedMaps(1);
     } else {
       console.log('please make new Search')
-    } 
+    }
   };
 
   //fills vm.maps array with lat.lng string from each destination address, if none then makes it first address
@@ -70,7 +70,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
       lat = string.slice(0,seperator);
       lng = string.slice(seperator + 1);
       //console.log(lat + 'then' + lng)
-      return 
+      return
     };
 
     latlngFromAddress(address);
@@ -85,8 +85,8 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
     });
 
     vm.renderMarker({
-      lat: lat, 
-      lng: lng, 
+      lat: lat,
+      lng: lng,
     });
 
   };
@@ -136,7 +136,6 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
   };
 
   vm.transferToResults = function(info) {
-    console.log('we actually ran this motha f')
     mainFactory.user.result = info;
     $location.path('results')
   }
@@ -153,7 +152,7 @@ savedSearches.controller('savedSearchesController', function(userFactory, mainFa
        map: vm.mapSave,
        title: obj.full
        })
-    var msgSaveMaker = function () { 
+    var msgSaveMaker = function () {
       if (info) {
            msgSave = '<div id="content" ng-click="vm.transferToResults(info)">' +
            //'<h1> score : 88! </h1>' +
