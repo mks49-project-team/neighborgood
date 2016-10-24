@@ -1,15 +1,21 @@
-<div>
+<div id='scores'>
 
   <div id='score-box'>
 
-    <div id='total-score'>
-      <span id='total-score-text'>Score</span>
-      <span id='total-score-value'>{{vm.scoreDisplay}}</span>
+    <div id='total-score' ng-class="{'low-score': vm.low, 'mid-score': vm.mid, 'high-score': vm.high}">
+      <span ng-class="{'low-score': vm.low, 'mid-score': vm.mid, 'high-score': vm.high}" id='total-score-text'>Score</span>
+      <br>
+      <span ng-class="{'low-score': vm.low, 'mid-score': vm.mid, 'high-score': vm.high}" id='total-score-value'>{{vm.scoreDisplay}}</span>
     </div>
 
-    <a ng-click="vm.showDetails()" href="">details</a>
-    <div id='scores-chart'></div>
+    <div id="chart-container">
+      <div id='scores-chart'></div>
+      <a ng-click="vm.showDetails()" href="">details</a>
+    </div>
+
+
     <div id='scoring-info' ng-show='vm.showDetailsText'>
+      <p ng-show="vm.showCommute">Typical Monday morning commute time: {{vm.commuteTime}} minutes</p>
       <p>
         Our scores range from 0 (worst) to 100 (best). The total score represents
         an average of the individual score for each category.

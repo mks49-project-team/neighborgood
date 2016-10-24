@@ -1,11 +1,15 @@
 <div>
     <div ui-view="nav"></div>
 
-     <h3 ng-click="vm.initMap()">NeighborgoodMaps</h3>
-    <div id="map" style="height:400px;width:100%;"></div>
-
+    <h3 id="results-header">Your Neighborhood Result</h3>
+    <div id="map" style="height:400px;width:80%;"></div>
+    <br>
     <div ui-view='scores'></div>
+    <br>
 
-    <button ng-click="vm.saveSearch()"><li>Save Search</li></button>
-
+    <div class="save-search">
+      <button class="btn btn-default" ng-show="vm.isUserLoggedIn" ng-click="vm.saveSearch()">Save Search</button>
+      <span ng-show="!vm.isUserLoggedIn">Sign in or sign up to save this neighborhood</span>
+      <span ng-show="vm.saved">Saved!</span>
+    </div>
 </div>

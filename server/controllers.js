@@ -1,5 +1,4 @@
 var request = require('request');
-//var crime = require('../crimeData/crimeStats.js');
 var neighborhoodScore = require('./neighborhoodScore.js');
 var accountsController = require('./../db/accounts/accountsController.js');
 
