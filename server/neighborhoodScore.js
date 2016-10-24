@@ -7,6 +7,9 @@ var getCommuteScore = function(time){
   // range from 0 (worst) to 100 (best)
   // commute < 20 min --> 100
   // commute > 120 min --> 0
+  if(time > 120) {
+    return 0;
+  }
   return time < 20 ? 100 : Math.round(100 - (time - 20));
 }
 
@@ -77,6 +80,7 @@ var getScores = function(req, res){
 
   if (priorities.commute) {
     var time = userData.commute.duration.value / 60; // convert to minutes
+    console.log('80 time: ', time);
     scores.commute = getCommuteScore(time);
   }
   if (priorities.walkability) {

@@ -5,17 +5,29 @@ body {
 
 nav {
   height: 50px;
-  float: left;
   width: 100%;
+  position: relative;
 }
-
+ul.navbar-nav {
+  white-space:nowrap;
+}
+.navbar-nav>li {
+  height: 100%;
+  float: left;
+  display: inline-block;
+}
 .navbar-header {
   float: right;
   display: block;
-  padding: 10px 15px;
-  height: 50px;
+  padding: 10px 10px;
+  height: 100%;
+  width: 20%;
   color: #798f74;
   font-size: 20px;
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  overflow: visible;
 }
 div.startup, div.options {
   width: 600px;
@@ -68,22 +80,30 @@ form.options {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-div.signin.ng-scope {
-  width: 300px;
+div.auth {
+  width: 80%;
+  height: 400px;
+  position: relative;
+  margin: auto;
+}
+div.signin {
+  width: 45%;
   height: 350px;
   background: rgba(242,239,232,0.7);
-  float: left;
-  margin: 10px 50px;
-  padding: 40px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 5%;
   /*display: inline;*/
 }
-div.signup.ng-scope {
-  width: 300px;
+div.signup {
+  width: 45%;
   height: 350px;
   background: rgba(242,239,232,0.7);
-  float: right;
-  margin: 10px 50px;
-  padding: 40px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 5%;
 }
 div#scores {
   width: 80%;
@@ -175,4 +195,17 @@ div#scores-chart.c3 {
   width: 50%;
   right: 0px;
   padding: 20px 20px;
+}
+#saved-searches-container {
+  width: 80%;
+  height: 200px;
+  margin: auto;
+  background: rgba(242,239,232,0.7);
+  padding: 20px 40px;
+  margin-bottom: 20px;
+}
+
+#mapSave {
+  margin: auto;
+  margin-bottom: 50px;
 }

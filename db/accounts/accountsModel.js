@@ -10,9 +10,11 @@ var accountsSchema = new Schema({
 
 accountsSchema.pre('save', function(next){
   // hash passwords before saving new user
-  var salt = bcrypt.genSaltSync(10);
-  var hash = bcrypt.hashSync(this.password, salt);
-  this.password = hash;
+  if(this.isNew){
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(this.password, salt);
+    this.password = hash;
+  }
   next();
 });
 accountsSchema.methods.checkPassword = function(pw){
@@ -20,5 +22,5 @@ accountsSchema.methods.checkPassword = function(pw){
 }
 var Accounts = mongoose.model('Accounts', accountsSchema);
 
-// Accounts.pre('save')
+
 module.exports = Accounts;

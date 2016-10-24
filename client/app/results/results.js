@@ -11,7 +11,6 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
     if ($window.localStorage.getItem('token') !== null) {
       userFactory.saveUserSearch(mainFactory.user.result)
         .then(function(response){
-          console.log('response: ', response);
           if(response.status === 200){
             vm.saved = true;
             mainFactory.user.result = {};
@@ -19,9 +18,6 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
           }
         });
     }
-    // } else if ($window.localStorage.getItem('token') === null) {
-    //   $location.path('signin')
-    // }
   }
 
   vm.getMapData = function() {
@@ -112,53 +108,42 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
                       '<h1>' + item.name + '</h1>' +
                       '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>'+ ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
                       '</div> </div>'
-           var infowindow = infowindowCreator(msg)
-           google.maps.event.addListener(marker, 'click', function() {
-
-                infowindow.open(vm.map, marker)
-
-
-        })
-           console.log(infowindow, 'this is stores info window');
-
-  				})
+            var infowindow = infowindowCreator(msg)
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(vm.map, marker)
+            });
+  				});
   		} else if (type === 'restaurant') {
   			resPath.nearbyRestaurants.forEach(
   				function(item){
             var holder = item.icon
             var iconPlace = iconMaker(holder);
-            console.log(iconPlace, 'this is first item in restaurants')
   					var marker = new google.maps.Marker({
   						position: {lat : item.lat, lng : item.lng},
   						map: vm.map,
   						icon: iconPlace,
               title: item.name
-  					})
+  					});
             var msg = '<div id="content">' +
                       '<h1>' + item.name + '</h1>' +
                       '<div id="bodyContent">' + item.name + ' is located walking distance (less than 15 min) from you! It\'s <strong>' + ratingStringGenerator(item.priceLevel) + '</strong> and has an overall rating of ' + item.rating + ' .' +
                       '</div> </div>'
             var infowindow = infowindowCreator(msg);
             google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(vm.map, marker)
-        })
-  				})
+              infowindow.open(vm.map, marker)
+            });
+  				});
   		}
 
   	}
 
     google.maps.event.addListener(home, 'click', function() {
-      homeinfo.open(vm.map, home)
-    })
-
-
-
-  	universalMarkerMaker('store')
-  	universalMarkerMaker('restaurant')
+      homeinfo.open(vm.map, home);
+    });
+  	universalMarkerMaker('store');
+  	universalMarkerMaker('restaurant');
   }
   vm.initMap();
 
   vm.isUserLoggedIn = userFactory.isUserLoggedIn();
-  console.log(vm.isUserLoggedIn);
-
 });

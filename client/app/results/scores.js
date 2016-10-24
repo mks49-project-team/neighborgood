@@ -6,6 +6,8 @@ scores.controller('scoresController', function(mainFactory){
   vm.scores = null;
   vm. neighborhood = null;
   vm.showDetailsText = false;
+  vm.showCommute = mainFactory.user.result.priorities.commute !== 0;
+  vm.commuteTime = vm.showCommute ? Math.round(mainFactory.user.result.commute.duration.value / 60) : false; 
 
   var setColors = function(chartData){
     return chartData.reduce(function(colors, category){
@@ -73,17 +75,12 @@ scores.controller('scoresController', function(mainFactory){
       bindto: '#scores-chart',
       size: {
         width: 200,
-        height: 200
+        height: 250
       },
       data: {
         columns : chartBlankData,//chartData,
         type: 'bar',
         colors: chartColors,
-      },
-      bar: {
-        width: {
-          ratio: 0.5
-        }
       },
       axis: {
         x: {
