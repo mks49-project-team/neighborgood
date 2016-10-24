@@ -54,7 +54,7 @@ scores.controller('scoresController', function(mainFactory){
         bindto: '#scores-chart',
         size: {
           width: 200,
-          height: 180
+          height: 200
         },
         data: {
           columns : chartBlankData,//chartData,
@@ -99,6 +99,7 @@ scores.controller('scoresController', function(mainFactory){
 
   var init = function(){
     vm.scores = mainFactory.getUserData().result.neighborhoodResult;
+    console.log('scores: ', vm.scores);
     vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
     // vm.scores = {safety: 40, walk: 3, total: 76};
     vm.scoreDisplay = vm.scores.total + '/100';

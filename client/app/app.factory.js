@@ -72,20 +72,18 @@ factoryModule.factory('mainFactory', function($http){
         lat: data.geometry.location.lat,
         lng: data.geometry.location.lng,
         latlng: data.geometry.location.lat + ',' + data.geometry.location.lng
+      }
     }
-  }
-    console.log(user, 'this is the user object in factory')
   }
 
 
   //uses GOOGLE PLACES api to grab restaurant info by latlng
   var startupRestaurantLocation = function(latlng) {
-    console.log(latlng, 'this is latlng')
     return $http({
       method: 'GET',
       url: 'api/restaurantLocation',
       params: {latlng: latlng}
-    })
+    });
   }
 
   //sets the user object with user.result.nearbyRestaurants
@@ -116,8 +114,9 @@ factoryModule.factory('mainFactory', function($http){
         lng : data[i].geometry.location.lng,
         latlng : data[i].geometry.location.lat + ',' + data[i].geometry.location.lng,
         placeId: data[i].place_id
-      })
+      });
     }
+    user.result.numRestaurants = data.length;
     //console.log(user.result.nearbyRestaurants, 'these are the nearby restaruants')
   }
 
@@ -128,7 +127,7 @@ factoryModule.factory('mainFactory', function($http){
       method: 'GET',
       url: 'api/storeLocation',
       params: {latlng: latlng}
-    })
+    });
   }
 
   //sets the user object with user.result.nearbyStores
@@ -164,8 +163,7 @@ factoryModule.factory('mainFactory', function($http){
         placeId: data[i].place_id
       })
     }
-    //console.log(user.result.nearbyStores, 'these are the nearby stores')
-    console.log(user, 'this is the user object')
+    user.result.numStores = data.length;
   }
 
   var getUserData = function() {
