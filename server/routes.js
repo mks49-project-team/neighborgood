@@ -14,8 +14,8 @@ router.get('/score', controller.getScore);
 router.post('/users/signin', controller.signin);
 router.post('/users/signup', controller.signup);
 router.get('/users/accounts', controller.getAccounts);
-router.get('/users/:username/searches'/*, jwtAuthentication*/, controller.getUserSearches);
-router.post('/users/:username/searches'/*, jwtAuthentication*/, controller.postUserSearch);
+router.get('/users/:username/searches', jwtAuthentication, controller.getUserSearches);
+router.post('/users/:username/searches', jwtAuthentication, controller.postUserSearch);
 
 module.exports = {
   router: router

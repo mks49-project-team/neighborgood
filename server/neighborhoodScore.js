@@ -60,14 +60,6 @@ var calcTotalScore = function(weights, scores){
 }
 
 var getScores = function(req, res){
-  // for testing ******
-  // var priorities = {walkability: 2, crime: 3, commute: 1};
-  //
-  // var userData = {};
-  // userData.nearbyRestaurants = new Array(20);
-  // userData.nearbyStores = new Array(6);
-  // userData.commute.duration.value = 3600;
-
   var userData = JSON.parse(req.query.userData);
   var priorities = userData.priorities;
   var geolocation = {

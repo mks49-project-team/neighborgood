@@ -209,3 +209,7 @@ div#scores-chart.c3 {
   margin: auto;
   margin-bottom: 50px;
 }
+
+#results-header {
+  text-align: center;
+}

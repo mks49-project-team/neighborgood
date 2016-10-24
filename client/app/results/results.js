@@ -46,13 +46,6 @@ results.controller('resultsController', function(mainFactory, userFactory, $wind
     var homeinfo = new google.maps.InfoWindow({
       content: '<h1> ' + resPath.newAddress.full + '</hi>'
     });
-      // function toggleBounce() {
-      //   if (home.getAnimation() !== null) {
-      //     home.setAnimation(null);
-      //   } else {
-      //     home.setAnimation(google.maps.Animation.BOUNCE);
-      //   }
-      // }
 
       if (resPath.destinationAddress !== undefined) {
         var commute = new google.maps.Marker({
