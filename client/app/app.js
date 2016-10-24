@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ui.router', 'app.factory', 'startup', 'options', 'results', 'scores', 'signin', 'signup', 'savedSearches', 'nav']);
 
-app.config(function($stateProvider, $urlRouterProvider){
+app.config(function($stateProvider, $urlRouterProvider, $httpProvider){
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
@@ -92,22 +92,4 @@ app.config(function($stateProvider, $urlRouterProvider){
        }
      }
    });
-
 });
-
-// var nav = angular.module('nav', ['app.factory.js'])
-// app.controller('navController', function($window, $location, userFactory){
-//   var vm = this;
-//   vm.isUserLoggedIn = false;
-//
-//   var init = function(){
-//     if($window.localStorage.user && $window.localStorage.token){
-//       vm.isUserLoggedIn = true;
-//     }
-//   }
-//   init();
-//   vm.signout = function(){
-//     userFactory.signout();
-//     $location.path('/signin');
-//   }
-// });

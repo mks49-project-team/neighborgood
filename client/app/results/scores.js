@@ -7,7 +7,7 @@ scores.controller('scoresController', function(mainFactory){
   vm. neighborhood = null;
   vm.showDetailsText = false;
   vm.showCommute = mainFactory.user.result.priorities.commute !== 0;
-  vm.commuteTime = vm.showCommute ? Math.round(mainFactory.user.result.commute.duration.value / 60) : false; 
+  vm.commuteTime = vm.showCommute ? Math.round(mainFactory.user.result.commute.durationInTraffic.value / 60) : false;
 
   var setColors = function(chartData){
     return chartData.reduce(function(colors, category){
@@ -24,7 +24,6 @@ scores.controller('scoresController', function(mainFactory){
 
   vm.showDetails = function(){
     vm.showDetailsText = true;
-    // generate data for bar chart
   }
 
   vm.low = false;
@@ -34,7 +33,7 @@ scores.controller('scoresController', function(mainFactory){
   var init = function(){
     vm.scores = mainFactory.getUserData().result.neighborhoodResult;
     vm.neighborhood = mainFactory.getUserData().result.newAddress.neighborhood;
-    vm.scoreDisplay = vm.scores.total + '/100';
+    vm.scoreDisplay = vm.scores.total;
     // color code score box
     if (vm.scores.total < 40){
       vm.low = true;
@@ -78,7 +77,7 @@ scores.controller('scoresController', function(mainFactory){
         height: 250
       },
       data: {
-        columns : chartBlankData,//chartData,
+        columns : chartBlankData,
         type: 'bar',
         colors: chartColors,
       },

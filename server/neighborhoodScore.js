@@ -71,8 +71,8 @@ var getScores = function(req, res){
   var scores = {};
 
   if (priorities.commute) {
-    var time = userData.commute.duration.value / 60; // convert to minutes
-    console.log('80 time: ', time);
+    var time = userData.commute.durationInTraffic.value / 60;
+    console.log('time: ', time)// convert to minutes
     scores.commute = getCommuteScore(time);
   }
   if (priorities.walkability) {
@@ -92,7 +92,6 @@ var getScores = function(req, res){
     scores.total = calcTotalScore(scoreWeights, scores);
     res.json(scores);
   }
-
 }
 
 

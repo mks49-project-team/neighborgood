@@ -3,7 +3,6 @@ var neighborhoodScore = require('./neighborhoodScore.js');
 var accountsController = require('./../db/accounts/accountsController.js');
 
 
-
 var googleMapsClient = require('@google/maps').createClient({
 	key: process.env.GOOGLE_API_KEY
 });
@@ -19,8 +18,7 @@ var controller = {
 				if (err) {
 					console.log(err, 'error feching geoCode on startup');
 				}
-				//console.log(response.json.results, 'this is resuts from geoCode Google')
-				res.send(response.json.results)
+				res.send(response.json.results);
 			})
 	},
 
@@ -89,8 +87,9 @@ var controller = {
 
 		request(options, function(error, response, body) {
 			if (error) {
-				console.log('theres an error in getDirections in controllers:', error)
+				console.log('theres an error in getDirections in controllers:', error);
 			} else {
+				console.log(body);
 				res.send(body)
 			}
 		});
@@ -98,9 +97,7 @@ var controller = {
 	},
 
 	getScore : function(req, res) {
-
 		neighborhoodScore.getScores(req, res);
-
 	},
 
 	signin : function(req, res) {
@@ -108,7 +105,6 @@ var controller = {
 	},
 
 	signup : function(req, res) {
-		// res.send('signup');
 		accountsController.signup(req, res);
 	},
 

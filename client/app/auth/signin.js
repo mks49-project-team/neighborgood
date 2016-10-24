@@ -15,6 +15,4 @@ signin.controller('signinController', function(userFactory, $location){
         }
       });
   }
-
-
 });

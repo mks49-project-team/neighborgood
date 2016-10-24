@@ -1,8 +1,6 @@
 var crimes = require('./crimeDataLA-2015.json');
 var request = require('request');
 var _ = require('lodash');
-// var neighborhoodScore = require('../server/neighborhoodScore.js');
-
 
 var convertCoord = function(s){
   var coord = s.slice(1, -1).split(' ');
@@ -105,11 +103,11 @@ var getCrimeScore = function(req){
   };
   // get population
   var options = {
-      method: 'GET',
-      url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
-      qs: {
-        statistics : 'population_density'
-      }
+    method: 'GET',
+    url: 'http://www.datasciencetoolkit.org/coordinates2statistics/' + lat + '%2c' + lng,
+    qs: {
+      statistics : 'population_density'
+    }
   };
   return new Promise(function(resolve, reject){
     // get population density
