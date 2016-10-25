@@ -249,7 +249,7 @@ factoryModule.factory('userFactory', function($http, $window){
         $window.localStorage.token = response.data.token;
         $window.localStorage.user = user.username;
         // set authorization header
-        $http.defaults.headers.common['Authorization'] = response.data.token;
+        // $http.defaults.headers.common['Authorization'] = response.data.token;
         return true;
       } else {
         return false;
@@ -267,7 +267,7 @@ factoryModule.factory('userFactory', function($http, $window){
       if(response.data !== "exists" && response.data.token) {
         $window.localStorage.token = response.data.token;
         $window.localStorage.user = user.username;
-        $http.defaults.headers.common['Authorization'] = response.data.token;
+        // $http.defaults.headers.common['Authorization'] = response.data.token;
       }
       return response;
     });
@@ -277,30 +277,55 @@ factoryModule.factory('userFactory', function($http, $window){
   var signout = function(){
     delete $window.localStorage.token;
     delete $window.localStorage.user;
-    $http.defaults.headers.common['Authorization'] = '';
+    // $http.defaults.headers.common['Authorization'] = '';
   }
 
   var saveUserSearch = function(search) {
-    return $http({
-      method: 'POST',
-      url: '/api/users/' + $window.localStorage.user + '/searches',
-      data: {
-        search: search
-      }
-    })
-    .then(function(response){
-      return response;
-    });
+    if(isUserLoggedIn()){
+      var token = $window.localStorage.token;
+      return $http({
+        method: 'POST',
+        url: '/api/users/' + $window.localStorage.user + '/searches',
+        data: {
+          search: search
+        },
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then(function(response){
+        return response;
+      });
+    } else {
+      return $http({
+        method: 'POST',
+        url: '/api/users/' + $window.localStorage.user + '/searches',
+        data: {
+          search: search
+        }
+      })
+      .then(function(response){
+        return response;
+      });
+    }
   }
 
   var getUserSearches = function() {
-    return $http({
-      method: 'GET',
-      url: '/api/users/' + $window.localStorage.user + '/searches',
-    })
-    .then(function(response){
-      return response.data;
-    });
+    if(isUserLoggedIn()){
+      var token = $window.localStorage.token;
+      return $http({
+        method: 'GET',
+        url: '/api/users/' + $window.localStorage.user + '/searches',
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then(function(response){
+        return response.data;
+      });
+    } else {
+
+    }
   }
 
   var isUserLoggedIn = function(){
