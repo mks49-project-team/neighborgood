@@ -80,3 +80,32 @@ visit http://localhost:8008/ on your browser for the landing page
 
 > Crime rates are estimated using [California crime data for 2015](https://data.lacity.org/A-Safe-City/Crimes-2012-2015/s9rj-h3s6) and population densities obtained via the [Data Science Toolkit coordinates to statistics API](http://www.datasciencetoolkit.org/coordinates2statistics).
 ```
+
+### Additional Features to add
+```
+> ADD YOUR OWN CSS
+
+> STARTUP PAGE:
+>   Add more information on what this site does. 
+> OPTIONS PAGE: 
+>   When user clicks on traffic options, have not only the input field spawn, but also the 5 previous addresses used.
+>     User will usually use the same commute address
+>   Set priorities, so that the score is calculated with what matters most for the user.
+>   Add more API information:
+>     Get house information on the area (zillow)
+>     Get school zone, school rating, school information
+>     Have user input the restaurant/store they want to find near them
+>       Render a score depending on how far away it is.
+>     Have user input anything else, aka Nail Salon, Movie Places, Malls
+>     Use Yelp to show some events in the area, show how much movement there is in an area
+>     Use an Rent api to see if you could rent something in the area
+>     ... so many more
+> RESULTS PAGE:
+>   Have the score render differently
+>   Have a sign in button on the bottom, when clicked it'll sign up/ sign in then send you to the results page to SAVE
+> SAVED RESULTS PAGE:
+>   Add more filters to be able to filter through each result and either change information or just render different things on map.
+> SERVERSIDE AUTH:
+>   Make sure the token works well. When you sign up and sign in.
+
+```
