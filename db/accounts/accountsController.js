@@ -10,9 +10,7 @@ var signin = function(req, res){
 
   Accounts.findOne({username: username})
     .exec(function(err, account){
-      console.log('account: ', account);
       if(account !== null){
-        console.log('password match?: ', account.checkPassword(password))
         if(account.checkPassword(password)){
           console.log('line20 : ', account);
           var payload = {iss: username};
@@ -62,11 +60,9 @@ var signup = function(req, res){
 var jwtAuthentication = function(req, res, next){
   // middleware function to check for jwt token
 
-  var token = req.headers['Authorization'];
-  console.log('inside jwt ', req.headers);
+  var token = req.headers['authorization'];
   if(token){
     var decoded = jwt.decode(token, 'neighborgood_secret');
-    console.log('decoded: ', decoded);
     Accounts.findOne({username: decoded.iss})
       .then(function(account){
         if(account){
@@ -108,7 +104,6 @@ var postUserSearch = function(req, res){
       res.status(200).json(account.results);
     });
 }
-
 
 module.exports = {
   signin: signin,
