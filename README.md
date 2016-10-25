@@ -105,7 +105,5 @@ visit http://localhost:8008/ on your browser for the landing page
 >   Have a sign in button on the bottom, when clicked it'll sign up/ sign in then send you to the results page to SAVE
 > SAVED RESULTS PAGE:
 >   Add more filters to be able to filter through each result and either change information or just render different things on map.
-> SERVERSIDE AUTH:
->   Fix bug with setting authorization headers using jwt tokens to access secured server-side routes. 
 
 ```
