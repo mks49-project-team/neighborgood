@@ -2,7 +2,9 @@ body {
   background: url("https://images.unsplash.com/photo-1444712244658-da55031906a9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&s=dbcfa919113ddd257ea878c6d5e643e9") no-repeat center center fixed;
   background-size: cover;
 }
-
+.container-fluid {
+  height: 100vh;
+}
 nav {
   height: 50px;
   width: 100%;
@@ -13,7 +15,6 @@ ul.navbar-nav {
 }
 .navbar-nav>li {
   height: 100%;
-  float: left;
   display: inline-block;
 }
 .navbar-header {
@@ -29,9 +30,55 @@ ul.navbar-nav {
   right: 0px;
   overflow: visible;
 }
+div.startup-container {
+  width: 100%;
+  height: 100%;
+}
+div.startup-description {
+  width: 100%;
+  height: 12%;
+  position: absolute;
+  bottom: 8%;
+  background-image: linear-gradient(0deg,rgba(6,6,19,0.8) 0%, rgba(6,6,19,0.5) 70%, rgba(6,6,19,0.05) 100%);
+}
+div.startup-description-header {
+  margin: 15px auto 15px auto;
+  width: 100%;
+  height: 25%;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+  text-shadow: 4px 4px 12px black;
+}
+div.startup-description>div.col-md-10 {
+  height: 75%;
+  padding-top: 25px;
+}
+div.description {
+  width: 33%;
+  height: 100%;
+  float: left; 
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  text-shadow: 2px 2px 10px black;
+}
+div.footer {
+  color: white;
+  width: 100%;
+  height: 8%;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(6,6,19,0.8);
+  text-align: center;
+  padding: 1%;
+}
+div.footer>div>a {
+  color: white;
+}
 div.startup, div.options {
-  width: 600px;
-  height: 400px;
+  width: 50%;
+  height: 50%;
   border-radius: 2px;
   background: rgba(242,239,232,0.7);
   position: relative;
@@ -42,20 +89,17 @@ div.startup, div.options {
 div.options {
   padding: 50px;
 }
-
 .startup-form-group {
-  width: 400px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
 form.startup, form.options {
-  width: 400px;
-  height: 150px;
+  width: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -64,8 +108,8 @@ form.startup, form.options {
 }
 form.options {
   margin-top: 30px;
+  font-size: 16px;
 }
-
 .btn {
   margin: 20px 0px;
   background-color: #b7b2c8;
@@ -202,7 +246,12 @@ div#scores-chart.c3 {
   padding: 20px 40px;
   margin-bottom: 20px;
 }
-
+div.results-header {
+  width: 100%;
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px 10px black;
+}
 #mapSave {
   margin: auto;
   margin-bottom: 50px;

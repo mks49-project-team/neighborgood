@@ -1,15 +1,35 @@
-<div>
+<div class="container-fluid">
 
 	<div ui-view="nav"></div>
 
-	<div class="startup">
-		<div class="startup-form-group">
-			<form class="startup" ng-submit="vm.newAddressPost()" ng-init="vm.autocomplete()">
-				<h3>Interested in a new location?</h3>
-				<input type="text" class="form-control" ng-model="vm.newAddress" id="autocomplete" autocomplete="on" placeholder="604 Arizona, Santa Monica CA" required>
-				<br>
-				<button type="submit" class="btn btn-dafault">Submit</button>
-			</form>
+		<div class="startup">
+			<div class="startup-form-group">
+				<form class="startup" ng-submit="vm.newAddressPost()" ng-init="vm.autocomplete()">
+					<h3>Interested in a new location?</h3>
+					<input type="text" class="form-control" ng-model="vm.newAddress" id="autocomplete" autocomplete="on" placeholder="604 Arizona, Santa Monica CA" required>
+					<br>
+					<button type="submit" class="btn btn-dafault">Submit</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="row startup-description">
+			<div class="startup-description-header">How it works</div>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="description">
+					<div class="description-text">1. Enter an address in the LA area</div>
+				</div>
+				<div class="description">
+					<div class="description-text">2. Select criteria that matter to you</div>
+				</div>
+				<div class="description">
+					<div class="description-text">3. Get your neighborhood score</div>
+				</div>
+			</div>
+		</div>
+		<div class="row footer">
+			<div><a href="https://github.com/mks49-project-team/neighborgood">Visit our Github</a></div>
+			<div>Team members: <a href="https://github.com/lucyji1000">Lucy Ji</a>   <a href="https://github.com/jeffyoo">Jeffrey Yoo</a>   <a href="https://github.com/sergysurge">Sergey Sarkisyan</a></div>
 		</div>
 	</div>
 
