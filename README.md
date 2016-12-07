@@ -14,15 +14,6 @@ https://neighborgood-demo.herokuapp.com
   - __Scrum Master__: Lucy Ji
   - __Development Team Members__: Jeffrey Yoo
 
-## Table of Contents
-
-1. [Usage](#Usage)
-2. [Development](#development)
-    2.1. [Installing Dependencies](#installing-dependencies)
-    2.2. [Tasks](#tasks)
-3. [Team](#team)
-
-
 ## Usage
 
 > 1. Navigate to landing page or click  on "new search"
